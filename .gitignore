@@ -8,10 +8,12 @@ node_modules/
 /frontend/tmp
 /frontend/out-tsc
 /frontend/bazel-out
+/frontend/.env
 
 # Python
 backend/venv/
 backend/.venv/
+backend/.env
 *.pyc
 __pycache__/
 
