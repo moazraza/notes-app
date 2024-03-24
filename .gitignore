@@ -1,0 +1,16 @@
+# Node
+node_modules/
+
+# Angular
+/frontend/dist/
+
+# Python
+backend/venv/
+*.pyc
+__pycache__/
+
+# macOS system files
+.DS_Store
+
+# Logs
+*.log
