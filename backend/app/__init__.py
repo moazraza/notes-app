@@ -14,7 +14,7 @@ def create_app():
     mongo = PyMongo(app)
 
     with app.app_context():
-        # Import parts of our application
+        # Import routes of our application
         from .routes import main
         app.register_blueprint(main)
 
