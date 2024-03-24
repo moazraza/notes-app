@@ -5,7 +5,7 @@ Intelligent-Sharing Notes App
 Go to the backend folder:
  - run `python -m venv venv`
  - On Windows `venv\Scripts\activate` or for macOS/Linux `source venv/bin/activate`
- - make sure the venv is activated, then run `pip install Flask`
+ - make sure the venv is activated, then run `pip install -r requirements.txt`
  - to exit the venv, run `deactivate`
  - run `.venv\Scripts\python.exe -m flask run`. Navigate to `http://localhost:5000/`.
 
