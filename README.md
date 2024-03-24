@@ -10,7 +10,7 @@ Go to the backend folder:
  - run `.venv\Scripts\python.exe -m flask run`. Navigate to `http://localhost:5000/`.
  
 To connect to the database, create a `.env` file in `backend` and add the following:
- - `MONGO_URI=mongodb+srv://<username>:<password>@notes-app.5zydcag.mongodb.net/notes?retryWrites=true&w=majority` where <username> and <password> are user specific
+ - `MONGO_URI=mongodb+srv://<username>:<password>@notes-app.5zydcag.mongodb.net/notes?retryWrites=true&w=majority` where `<username>` and `<password>` are user specific
 
 ## Development server for Angular
 
