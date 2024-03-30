@@ -22,7 +22,7 @@ def create_post():
         if not user:
             return jsonify({'message': 'user not exist'}), 404
 
-        # 创建推文对象
+        # make new post
         post = Post(
             title=title,
             content=content,
@@ -32,7 +32,6 @@ def create_post():
             updated_at=datetime.utcnow()
         )
 
-        # 保存推文到数据库
         post.save()
 
         return jsonify({'message': 'success', 'post_id': str(post.id)}), 201

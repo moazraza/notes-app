@@ -19,7 +19,7 @@ def user_register():
         if User.objects(email=email).first():
             return jsonify({'message': 'Email has been registered'}), 409
 
-        # 创建新用户
+        # make new user
         new_user = User(
             username=username,
             email=email,
