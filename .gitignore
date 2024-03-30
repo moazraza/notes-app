@@ -9,6 +9,7 @@ node_modules/
 /frontend/out-tsc
 /frontend/bazel-out
 /frontend/.env
+/frontend/.angular
 
 # Python
 backend/venv/
