@@ -4,17 +4,17 @@ from dotenv import load_dotenv
 import os
 from mongoengine import connect
 
-mongo = None
-app = Flask(__name__)
+# mongo = None
 
 
 def create_app():
-    global mongo
+    # global mongo
+    app = Flask(__name__)
     load_dotenv()
     app.config['MONGO_URI'] = os.environ.get("MONGO_URI")
     app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
     app.config['WTF_CSRF_ENABLED'] = False
-    mongo = PyMongo(app)
+    # mongo = PyMongo(app)
     mongo_db = connect('notes', host=app.config['MONGO_URI'])
     with app.app_context():
         # Import routes of our application
