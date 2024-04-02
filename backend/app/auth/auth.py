@@ -1,6 +1,5 @@
 from flask import Flask,Blueprint,request,jsonify,g
-from backend.app.model.models import *
-# ..model.models import *
+from ..model.models import *
 from ..auth.forms import LoginForm
 import functools
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired
