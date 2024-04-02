@@ -1,20 +1,24 @@
 from flask import Blueprint, jsonify
-from . import mongo
-from bson.json_util import dumps
 
 main = Blueprint('main', __name__)
 
 
+# define main route which returns the API usage for user and post
 @main.route('/')
-def hello_world():
-    # Try to retrieve a document from MongoDB
-    test_collection = mongo.db.test_collection
-    document = test_collection.find_one()
-
-    if document:
-        # Use dumps from bson.json_util which handles ObjectId types
-        document_json = dumps(document)
-        return jsonify({"success": True, "data": document_json}), 200
-    else:
-        return jsonify({"success": False, "message": "Document not found"}), 404
-
+def root():
+    usage_info = {
+        "message": "API Usage",
+        "routes": {
+            "get_user": {
+                "method": "GET",
+                "description": "Retrieves user information",
+                "example": "/get_user"
+            },
+            "get_post": {
+                "method": "GET",
+                "description": "Retrieves all posts",
+                "example": "/get_post"
+            }
+        }
+    }
+    return jsonify(usage_info), 200
