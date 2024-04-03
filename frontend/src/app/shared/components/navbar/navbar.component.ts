@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +8,8 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
     imports: [
         RouterLink,
         RouterLinkActive,
-        RouterOutlet
+        RouterOutlet,
+        NgOptimizedImage
     ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
