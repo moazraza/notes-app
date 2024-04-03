@@ -1,1 +1,17 @@
-<p>navbar works!</p>
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a href="/">
+            <img src="path-to-your-logo" alt="WE"/>
+        </a>
+    </div>
+    <div class="navbar-search">
+        <input type="text" placeholder="Search">
+    </div>
+    <div class="navbar-links">
+        <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
+        <a routerLink="/profile" routerLinkActive="active" ariaCurrentWhenActive="page">Profile</a>
+        <a href="/settings">Settings</a>
+    </div>
+</nav>
+<!-- The routed views render in the <router-outlet>-->
+<router-outlet></router-outlet>
