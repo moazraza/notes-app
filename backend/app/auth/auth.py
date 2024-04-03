@@ -2,7 +2,7 @@ from flask import Flask,Blueprint,request,jsonify,g
 from app.models.models import *
 from ..auth.forms import LoginForm
 import functools
-from itsdangerous import URLSafeTimedSerializer as Serializer, BadSignature, SignatureExpired
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired
 import os
 from bson import ObjectId
 
