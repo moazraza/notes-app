@@ -1,8 +1,8 @@
-from datetime import datetime
+from datetime import datetime,timedelta
 from mongoengine import Document, StringField, IntField, ListField, DateTimeField, ReferenceField
-from werkzeug.security import generate_password_hash, check_password_hash
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from werkzeug.security import check_password_hash
 import os
+import jwt
 class User(Document):
     username = StringField(required=True, unique=False)
     email = StringField(required=True, unique=True)
@@ -16,8 +16,14 @@ class User(Document):
 
 
     def create_token(self):
-        s = Serializer(os.environ.get("SECRET_KEY"), expires_in=int(os.environ.get("TOKEN_EXPIRATION")))
-        return s.dumps({'id': str(self.id)}).decode('utf-8')
+        # s = Serializer(os.environ.get("SECRET_KEY"), expires_in=int(os.environ.get("TOKEN_EXPIRATION")))
+        # return s.dumps({'id': str(self.id)}).decode('utf-8')
+        payload = {
+            'user_id': str(self.id),
+            'exp': datetime.utcnow() + timedelta(seconds=int(os.environ.get("TOKEN_EXPIRATION")))
+        }
+        token = jwt.encode(payload, os.environ.get("SECRET_KEY"), algorithm='HS256')
+        return token
 
 class Post(Document):
     title = StringField(required=True)
