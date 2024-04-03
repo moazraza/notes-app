@@ -1,5 +1,5 @@
 from flask import Flask,Blueprint,request,jsonify
-from app.models.models import *
+from app.model.models import *
 from werkzeug.security import generate_password_hash
 from ..user.forms import RegistrationForm
 app = Flask(__name__)
