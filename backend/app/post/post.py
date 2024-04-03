@@ -1,5 +1,6 @@
 from flask import Flask,Blueprint,request,g,jsonify
-from app.models.models import *
+from ..model.models import *
+# from backend.app.model.models import *
 from ..post.forms import PostForm
 from bson import ObjectId
 from ..auth.auth import login_required

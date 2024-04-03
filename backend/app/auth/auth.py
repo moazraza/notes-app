@@ -1,10 +1,11 @@
 from flask import Flask,Blueprint,request,jsonify,g
-from app.models.models import *
+from ..model.models import *
 from ..auth.forms import LoginForm
 import functools
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired
+# from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired
 import os
 from bson import ObjectId
+import jwt
 
 app = Flask(__name__)
 auth_db = Blueprint('auth_db', __name__)
@@ -33,28 +34,25 @@ def login():
         return jsonify({'message': 'failed', 'errors': form.errors}), 400
 
 def verify_token(token):
-    s = Serializer(os.environ.get("SECRET_KEY"))
     try:
-        data = s.loads(token)
-    except SignatureExpired:
+        payload = jwt.decode(token, os.environ.get("SECRET_KEY"), algorithms=['HS256'])
+        user_id = payload.get('user_id')
+        user = User.objects(id=ObjectId(user_id)).first()
+        if not user:
+            raise Exception("user not exist")
+        g.user_id = user_id
+        return True
+    except jwt.ExpiredSignatureError:
         raise Exception("token expired")
-    except BadSignature:
+    except jwt.InvalidTokenError:
         raise Exception("token incorrect")
-
-    user_id = data.get('id')
-
-    user = User.objects(id=ObjectId(user_id)).first()
-    if not user:
-        raise Exception("user not exist")
-    g.user_id = user_id
-    return True
 
 def login_required(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         token = request.headers.get('Authorization')
         if not token:
-            raise Exception("缺少Authorization参数")
+            raise Exception("lost Authorization parameter")
         if verify_token(token):
             return func(*args, **kwargs)
     return wrapper
