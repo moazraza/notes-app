@@ -1,0 +1,55 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
+    height: 20px; /* Or whatever fixed height you prefer */
+    line-height: 20px; /* Same as navbar height to center the content */
+}
+
+.navbar-search {
+    position: relative;
+    flex-grow: 1;
+    margin: 0 20rem;
+}
+
+.navbar-search input[type="text"] {
+    width: 100%;
+    padding: 0.3rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.navbar-search input[type="text"]::placeholder {
+    color: #aaa;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 2rem;
+    font-size: 1rem;
+}
+
+.navbar-logo {
+  width: 80px; /* Set the width as desired */
+  height: auto; /* Maintain aspect ratio */
+  /* Align the logo vertically */
+  vertical-align: center;
+}
+
+/*body {
+    padding-top: 64px;
+}*/
