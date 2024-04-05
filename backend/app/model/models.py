@@ -14,10 +14,7 @@ class User(Document):
     def verify_password(self, password):
         return check_password_hash(self.password, password)
 
-
     def create_token(self):
-        # s = Serializer(os.environ.get("SECRET_KEY"), expires_in=int(os.environ.get("TOKEN_EXPIRATION")))
-        # return s.dumps({'id': str(self.id)}).decode('utf-8')
         payload = {
             'user_id': str(self.id),
             'exp': datetime.utcnow() + timedelta(seconds=int(os.environ.get("TOKEN_EXPIRATION")))
@@ -32,6 +29,8 @@ class Post(Document):
     image_paths = ListField(StringField())
     created_at = DateTimeField(default=datetime.utcnow)
     updated_at = DateTimeField(default=datetime.utcnow)
+    likes = ListField(ReferenceField(User))
+    comments = ListField(ReferenceField('Comment'))
 
 class Like(Document):
     user = ReferenceField(User, reverse_delete_rule='CASCADE')
