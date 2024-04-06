@@ -1,1 +1,97 @@
-<p>profile works!</p>
+<!DOCTYPE html>
+<head>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      font-family: arial;
+
+    }
+
+    .title-line{
+      width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      display: grid;
+      grid-template-columns: 300px 500px 1fr;
+    }
+
+    .author{
+      width: 200px;
+      height: 80px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      align-items: center;
+      
+    }
+
+    .thumbnail{
+      display: grid;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+
+    }
+
+    .data{
+      display: grid;
+      grid-template-columns: auto auto auto;
+
+    }
+  
+    .data-posts{
+      padding: 10px;
+      display: grid;
+      justify-items: center;
+      align-items:center;
+
+    }
+
+    .button-plus-div{
+      display: grid;
+      justify-items: center;
+      align-items:center;
+    }
+    
+    .button-plus{
+      width: 20px;
+      height: 20px;
+      font-size: 15px;
+      
+    }
+
+  </style>
+
+</head>
+
+<body>  
+<div class = 'title-line'>
+    
+    <div class="author">
+        <img class="thumbnail" src="images.jpeg" >
+        <p>Becki Jia</p>
+    </div>
+
+    <div class="data">
+      <div class="data-posts"> 
+        <p>1,234</p>
+        <p style="font-weight: bold">Posts</p>
+      </div>
+
+      <div class="data-posts"> 
+        <p>5,678</p>
+        <p style="font-weight: bold">Followers</p>
+      </div>
+
+      <div class="data-posts"> 
+        <p>9,101</p>
+        <p style="font-weight: bold">Following</p>
+      </div>
+
+    </div>
+
+    <div class="button-plus-div">
+      <button class="button-plus"> + </button>
+    </div>
+</div>
+</body>
