@@ -2,7 +2,7 @@ from datetime import datetime
 import os
 from config import POST_UPLOADED_FILE_PATH,ICON_UPLOADED_FILE_PATH,ALLOWED_EXTENSIONS
 import secrets
-
+import base64
 
 
 def allowed_file(filename):
@@ -28,6 +28,8 @@ def upload_files(file,tag):
             upload_path = os.path.join(ICON_UPLOADED_FILE_PATH, new_filename)
         else:
             upload_path = ""
+        # image_base64 = base64.b64encode(file.read()).decode('utf-8')
+        # print(image_base64)
         file.save(upload_path)
         return new_filename, original_filename
     except Exception as e:

@@ -5,6 +5,8 @@ from ..post.forms import PostForm
 from bson import ObjectId
 from ..auth.auth import login_required
 from backend.utilities import upload_files
+from mongoengine.errors import DoesNotExist
+
 
 app = Flask(__name__)
 post_db = Blueprint('post_db', __name__)
@@ -68,14 +70,20 @@ def create_post():
 
 @post_db.route('/get_post', methods=['GET'])
 def post_query():
-    post_data = Post.objects().only('title', 'content', 'user','image_paths')
+    post_data = Post.objects().only('title', 'content', 'user', 'image_paths')
     post_data_list = []
+
     for post in post_data:
+        try:
+            username = post.user.username if post.user else 'Unknown User'
+        except DoesNotExist:
+            username = 'Unknown User'
+
         post_data_list.append({
             'title': post.title,
             'content': post.content,
-            'user': post.user.username,
-            'image_paths':post.image_paths
+            'user': username,
+            'image_paths': post.image_paths
         })
 
     return jsonify({'message': 'post information', 'result': post_data_list}), 200
