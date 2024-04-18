@@ -1,4 +1,6 @@
-from flask import Flask,Blueprint,request,g,jsonify
+import logging
+
+from flask import Flask, Blueprint, request, g, jsonify
 from ..model.models import *
 # from backend.app.model.models import *
 from ..post.forms import PostForm
@@ -7,6 +9,7 @@ from ..auth.auth import login_required
 
 app = Flask(__name__)
 post_db = Blueprint('post_db', __name__)
+
 
 @post_db.route('/posts', methods=['POST'])
 @login_required
@@ -39,6 +42,7 @@ def create_post():
     else:
         return jsonify({'message': 'failed', 'errors': form.errors}), 400
 
+
 @post_db.route('/get_post', methods=['GET'])
 def post_query():
     post_data = Post.objects().only('title', 'content', 'user')
@@ -51,4 +55,6 @@ def post_query():
             'user': post.user.username
         })
 
-    return jsonify({'message': 'post information', 'result': post_data_list}), 200
+    logging.debug("Fetched Posts Data: %s", post_data_list)
+
+    return jsonify(post_data_list), 200
