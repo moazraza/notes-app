@@ -1,28 +1,42 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {PostCardComponent} from "../posts/post-card/post-card.component";
+import {PostsService} from "../../services/posts.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
+    selector: 'app-home',
+    standalone: true,
     imports: [
         NgForOf,
         PostCardComponent,
-        NgIf
+        NgIf,
+        HttpClientModule
     ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    providers: [PostsService],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-    posts = [
-        {title: 'Post 1', content: 'Content 1'},
-        {title: 'Post 2', content: 'Content 2'},
-        {title: 'Post 3', content: 'Content 3'},
-        {title: 'Post 4', content: 'Content 4'},
-        {title: 'Post 5', content: 'Content 5'},
-        {title: 'Post 6', content: 'Content 6'},
-    ];
+    posts: any[] = [];
+
+
+    constructor(private postsService: PostsService) {
+        this.postsService.getPosts().subscribe({
+            next: (data) => {
+                this.posts = data;
+                console.log('data is:', this.posts);
+            },
+            error: (error) => {
+                console.error('error fetching posts: ', error);
+            }
+        });
+    }
+
+    ngOnInit(): void {
+
+    }
 
 
 }
