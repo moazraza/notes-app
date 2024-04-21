@@ -1,3 +1,4 @@
+
 .navbar {
     position: sticky;
     top: 0;
@@ -5,51 +6,83 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
-    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
-    padding: 1rem 2rem;
-    height: 20px; /* Or whatever fixed height you prefer */
-    line-height: 20px; /* Same as navbar height to center the content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: auto;
 }
 
-.navbar-search {
-    position: relative;
-    flex-grow: 1;
-    margin: 0 20rem;
-}
-
-.navbar-search input[type="text"] {
-    width: 100%;
-    padding: 0.3rem 1rem;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    box-sizing: border-box;
-}
-
-.navbar-search input[type="text"]::placeholder {
-    color: #aaa;
-}
-
-.navbar-links {
+.navbar-brand {
     display: flex;
     align-items: center;
 }
 
-.navbar-links a {
-    text-decoration: none;
-    color: #333;
-    margin-left: 2rem;
-    font-size: 1rem;
+.navbar-brand img {
+    margin-right: 1px; /* Space between logo and brand text */
 }
+
+/* Adjust form control to fit your design */
+.form-control {
+    min-width: 600px; /* Set maximum width for search bar */
+}
+
+/* Navbar links */
+.nav-link {
+    margin: 0 15px; /* Space between links */
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-search {
+    width: 100%; /* Take up 100% of the parent element's width */
+    max-width: 300px; /* Maximum width of the search bar */
+    margin: 0 auto; /* Centers the search bar within its parent */
+}
+
+@media (min-width: 992px) {
+    .navbar-collapse form {
+        flex-grow: 0; /* Prevent the form from growing */
+        flex-shrink: 0; /* Prevent the form from shrinking */
+        display: flex; /* Align search bar correctly */
+        justify-content: center; /* Center the search bar */
+    }
+}
+
 
 .navbar-logo {
-  width: 80px; /* Set the width as desired */
-  height: auto; /* Maintain aspect ratio */
-  /* Align the logo vertically */
-  vertical-align: center;
+    height: auto;
+    width: auto; /* Adjust as needed */
+    max-width: 80px; /* Adjust as needed */
 }
 
-/*body {
-    padding-top: 64px;
-}*/
+/* Navbar toggler style */
+.navbar-toggler {
+    margin-left: auto; /* Push toggler to the end of the navbar */
+}
+
+.fa-search {
+    font-size: 1.5rem; /* Adjust the size as needed */
+}
+
+@media (max-width: 991px) {
+    /* Adjustments for smaller screens */
+    .navbar-search {
+        margin-top: 0.5rem; /* Extra margin on top for mobile */
+        margin-bottom: 0.5rem; /* Extra margin at bottom for mobile */
+        width: 100%; /* Full width on small screens */
+    }
+
+    .form-control {
+        min-width: 0; /* Remove minimum width */
+    }
+
+    .navbar-collapse {
+        flex-grow: 0; /* Prevent the navbar from taking too much space */
+    }
+
+    .navbar .nav-link {
+        padding-left: 0; /* Remove padding if needed */
+    }
+}
+

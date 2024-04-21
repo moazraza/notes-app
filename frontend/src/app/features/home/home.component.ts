@@ -1,65 +1,42 @@
-import {Component, Input} from '@angular/core';
-import {NgForOf} from "@angular/common";
+import {Component, Input, OnInit} from '@angular/core';
+import {NgForOf, NgIf} from "@angular/common";
+import {PostCardComponent} from "../posts/post-card/post-card.component";
+import {PostsService} from "../../services/posts.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
+    selector: 'app-home',
+    standalone: true,
     imports: [
-        NgForOf
+        NgForOf,
+        PostCardComponent,
+        NgIf,
+        HttpClientModule
     ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    providers: [PostsService],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-    users = [
-        {name: 'John', age: 25},
-        {name: 'Jane', age: 22},
-        {name: 'Jack', age: 30},
-        {name: 'Jill', age: 26},
-        {name: 'James', age: 27},
-        {name: 'Jenny', age: 28},
-        {name: 'Joe', age: 24},
-        {name: 'Judy', age: 23},
-        {name: 'Jerry', age: 29},
-        {name: 'Jessica', age: 21},
-        {name: 'Jeff', age: 31},
-        {name: 'Jasmine', age: 32},
-        {name: 'Josh', age: 33},
-        {name: 'Jocelyn', age: 34},
-        {name: 'Jesse', age: 35},
-        {name: 'Jared', age: 36},
-        {name: 'Jill', age: 26},
-        {name: 'James', age: 27},
-        {name: 'Jenny', age: 28},
-        {name: 'Joe', age: 24},
-        {name: 'Judy', age: 23},
-        {name: 'Jerry', age: 29},
-        {name: 'Jessica', age: 21},
-        {name: 'John', age: 25},
-        {name: 'Jane', age: 22},
-        {name: 'Jack', age: 30},
-        {name: 'Jill', age: 26},
-        {name: 'James', age: 27},
-        {name: 'Jenny', age: 28},
-        {name: 'Joe', age: 24},
-        {name: 'Judy', age: 23},
-        {name: 'Jerry', age: 29},
-        {name: 'Jessica', age: 21},
-        {name: 'Jeff', age: 31},
-        {name: 'Jasmine', age: 32},
-        {name: 'Josh', age: 33},
-        {name: 'Jocelyn', age: 34},
-        {name: 'Jesse', age: 35},
-        {name: 'Jared', age: 36},
-        {name: 'Jill', age: 26},
-        {name: 'James', age: 27},
-        {name: 'Jenny', age: 28},
-        {name: 'Joe', age: 24},
-        {name: 'Judy', age: 23},
-        {name: 'Jerry', age: 29},
-        {name: 'Jessica', age: 21}
-    ];
+    posts: any[] = [];
+
+
+    constructor(private postsService: PostsService) {
+        this.postsService.getPosts().subscribe({
+            next: (data) => {
+                this.posts = data;
+                console.log('data is:', this.posts);
+            },
+            error: (error) => {
+                console.error('error fetching posts: ', error);
+            }
+        });
+    }
+
+    ngOnInit(): void {
+
+    }
 
 
 }

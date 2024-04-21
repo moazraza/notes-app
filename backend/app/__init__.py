@@ -1,8 +1,10 @@
+import logging
 from flask import Flask
 from flask_pymongo import PyMongo
 from dotenv import load_dotenv
 import os
 from mongoengine import connect
+from flask_cors import CORS
 
 # mongo = None
 
@@ -10,6 +12,8 @@ from mongoengine import connect
 def create_app():
     # global mongo
     app = Flask(__name__)
+    CORS(app)
+    logging.basicConfig(level=logging.DEBUG)
     load_dotenv()
     app.config['MONGO_URI'] = os.environ.get("MONGO_URI")
     app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
