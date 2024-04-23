@@ -1,5 +1,5 @@
-from flask import Flask, Blueprint, request, jsonify
-from app.model.models import *
+from flask import Flask,Blueprint,request,jsonify
+from ..model.models import *
 from werkzeug.security import generate_password_hash
 
 from ..auth.auth import login_required

@@ -14,14 +14,13 @@ class User(Document):
     full_name = StringField(required=False)
     created_at = DateTimeField(default=datetime.utcnow)
     updated_at = DateTimeField(default=datetime.utcnow)
+    role = ReferenceField("Role")
     meta = {'collection': 'users'}
 
     def verify_password(self, password):
         return check_password_hash(self.password, password)
 
     def create_token(self):
-        # s = Serializer(os.environ.get("SECRET_KEY"), expires_in=int(os.environ.get("TOKEN_EXPIRATION")))
-        # return s.dumps({'id': str(self.id)}).decode('utf-8')
         payload = {
             'user_id': str(self.id),
             'exp': datetime.utcnow() + timedelta(seconds=int(os.environ.get("TOKEN_EXPIRATION")))
@@ -85,6 +84,12 @@ class Follow(Document):
     updated_at = DateTimeField(default=datetime.utcnow)
     meta = {'collection': 'follows'}
 
+class Role(Document):
+    name = StringField(required=True, unique=True)
+    permissions = ListField(StringField())
+    created_at = DateTimeField(default=datetime.utcnow)
+    updated_at = DateTimeField(default=datetime.utcnow)
+    meta = {'collection': 'roles'}
 
 Post.register_delete_rule(Like, 'likes', 'CASCADE')
 Post.register_delete_rule(Bookmark, 'bookmarks', 'CASCADE')
