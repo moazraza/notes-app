@@ -1,1 +1,50 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
+            <img src="assets/we-main.png" alt="We Logo" class="navbar-logo">
+            WE
+        </a>
+
+        <div class="d-flex order-lg-3 ms-auto">
+            <!-- Search icon for mobile -->
+            <a class="nav-link navbar-search-icon d-lg-none" (click)="toggleSearchBar()" [class.d-none]="showSearchBar">
+                <i class="fa fa-search"></i>
+            </a>
+
+            <!-- Search bar for mobile -->
+            <div class="d-lg-none" [class.d-none]="!showSearchBar">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </div>
+
+
+            <!-- Toggler button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <!-- Search bar centered -->
+            <form class="mx-auto d-none d-lg-block navbar-search">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            </form>
+
+            <!-- Navbar links on the right -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<router-outlet></router-outlet>

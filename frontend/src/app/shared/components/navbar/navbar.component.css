@@ -1,0 +1,88 @@
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: auto;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    margin-right: 1px; /* Space between logo and brand text */
+}
+
+/* Adjust form control to fit your design */
+.form-control {
+    min-width: 600px; /* Set maximum width for search bar */
+}
+
+/* Navbar links */
+.nav-link {
+    margin: 0 15px; /* Space between links */
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-search {
+    width: 100%; /* Take up 100% of the parent element's width */
+    max-width: 300px; /* Maximum width of the search bar */
+    margin: 0 auto; /* Centers the search bar within its parent */
+}
+
+@media (min-width: 992px) {
+    .navbar-collapse form {
+        flex-grow: 0; /* Prevent the form from growing */
+        flex-shrink: 0; /* Prevent the form from shrinking */
+        display: flex; /* Align search bar correctly */
+        justify-content: center; /* Center the search bar */
+    }
+}
+
+
+.navbar-logo {
+    height: auto;
+    width: auto; /* Adjust as needed */
+    max-width: 80px; /* Adjust as needed */
+}
+
+/* Navbar toggler style */
+.navbar-toggler {
+    margin-left: auto; /* Push toggler to the end of the navbar */
+}
+
+.fa-search {
+    font-size: 1.5rem; /* Adjust the size as needed */
+}
+
+@media (max-width: 991px) {
+    /* Adjustments for smaller screens */
+    .navbar-search {
+        margin-top: 0.5rem; /* Extra margin on top for mobile */
+        margin-bottom: 0.5rem; /* Extra margin at bottom for mobile */
+        width: 100%; /* Full width on small screens */
+    }
+
+    .form-control {
+        min-width: 0; /* Remove minimum width */
+    }
+
+    .navbar-collapse {
+        flex-grow: 0; /* Prevent the navbar from taking too much space */
+    }
+
+    .navbar .nav-link {
+        padding-left: 0; /* Remove padding if needed */
+    }
+}
+

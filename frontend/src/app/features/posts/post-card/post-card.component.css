@@ -1,0 +1,43 @@
+.post-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px 16px 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.post-image img {
+    width: 100%;
+    display: block;
+}
+
+.post-content {
+    padding: 16px;
+}
+
+.post-stats {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.post-stats span {
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+}
+
+.post-stats i {
+    margin-right: 4px;
+}
+
+.post-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.post-description {
+    font-size: 14px;
+    color: #666;
+}
