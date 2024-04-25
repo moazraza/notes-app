@@ -1,0 +1,57 @@
+.post-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.post-image img {
+    width: 100%;
+    height: auto; /* Adjust if you want a fixed height */
+}
+
+#postModal {
+    background-color: #00000029;
+}
+
+.modal-body {
+    display: flex;
+}
+.modal-content {
+    padding: 0px;
+}
+
+.post-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post-stats {
+    font-size: 0.9em;
+    font-weight: 300;
+    color: #333; /* Adjust the color to match your design */
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.post-stats span {
+    margin-right: 10px;
+}
+
+.post-title {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #182135; /* Adjust the color to match your design */
+}
+
+.post-description {
+    font-size: 12px;
+    font-weight: 400;
+    color: #182135; /* Adjust the color to match your design */
+}

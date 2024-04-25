@@ -1,0 +1,222 @@
+<div class="post-card" (click)="openModal()">
+    <div class="post-image">
+        <img [src]="'assets/placeholder.png'" alt="Post Image" />
+    </div>
+    <div class="post-content">
+        <div class="post-stats">
+            <span><i class="far fa-comment count"></i> 12</span>
+            <span><i class="fa fa-retweet count"></i> 5</span>
+            <span><i class="far fa-heart count"></i> 66</span>
+            <span><i class="fa fa-upload count"></i></span>
+        </div>
+        <h3 class="post-title">{{ post.title }}</h3>
+        <p class="post-description">{{ post.content }}</p>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="postModal" tabindex="-1" (click)="closeModal()">
+    <div
+        class="modal-dialog modal-dialog-centered"
+        style="max-width: 70%; min-height: 80vh"
+    >
+        <div
+            class="modal-content"
+            style="
+                background-color: #ffffff;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            "
+        >
+            <div
+                class="modal-body"
+                style="display: flex; gap: 20px; padding: 24px"
+            >
+                <!-- Left Column -->
+                <div
+                    style="
+                        width: 68%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 16px;
+                    "
+                >
+                    <div
+                        class="post-image"
+                        style="height: 250px; overflow: hidden"
+                    >
+                        <img
+                            src="assets/placeholder.png"
+                            alt="Post Image"
+                            style="width: 100%; height: auto; object-fit: cover"
+                        />
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            justify-content: space-around;
+                            align-items: center;
+                        "
+                    >
+                        <!-- Interaction Icons -->
+                        <span><i class="far fa-comment count"></i> 12</span>
+                        <span><i class="fa fa-retweet count"></i> 5</span>
+                        <span><i class="far fa-heart count"></i> 66</span>
+                        <span><i class="fa fa-upload count"></i></span>
+                    </div>
+                    <!-- User Profile and Description -->
+                    <div style="display: flex; gap: 12px">
+                        <div
+                            style="
+                                width: 48px;
+                                height: 48px;
+                                border-radius: 100%;
+                                background-color: #cccccc;
+                                overflow: hidden;
+                            "
+                        >
+                            <img
+                                src="path-to-user-image.jpg"
+                                alt="User"
+                                style="width: 100%; object-fit: cover"
+                            />
+                        </div>
+                        <div>
+                            <div style="font-weight: bold">Osbaldo</div>
+                            <div style="color: #6c757d; font-size: 0.9em">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Id neque mattis molestie eget
+                                phasellus tellus amet duis in.
+                            </div>
+                            <div
+                                style="
+                                    color: #6c757d;
+                                    font-size: 0.8em;
+                                    display: flex;
+                                    gap: 4px;
+                                "
+                            >
+                                about 1 hour ago
+                                <div style="font-weight: 400; color: black">
+                                    Like
+                                </div>
+                                <div style="font-weight: 400; color: black">
+                                    Reply
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column for Comments -->
+                <div
+                    style="
+                        width: 33%;
+                        display: flex;
+                        flex-direction: column;
+                        background-color: #ffffff;
+                        padding: 16px;
+                        border-radius: 8px;
+                        overflow-y: auto;
+                    "
+                >
+                    <div style="font-weight: bold">3 comments</div>
+                    <!-- Static comments -->
+                    <div style="margin-top: 16px">
+                        <strong>John Doe</strong>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Id neque mattis molestie eget phasellus tellus
+                            amet duis in.
+                        </p>
+                        <!-- <div style="color: #6C757D; font-size: 0.8em;">Liked by 3 people</div> -->
+                        <div
+                            style="
+                                color: #6c757d;
+                                font-size: 0.8em;
+                                display: flex;
+                                gap: 4px;
+                            "
+                        >
+                            about 3 hour ago
+                            <div style="font-weight: 400; color: black">
+                                Like
+                            </div>
+                            <div style="font-weight: 400; color: black">
+                                Reply
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px">
+                        <strong>Jane Smith</strong>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Id neque mattis molestie eget phasellus tellus
+                            amet duis in.
+                        </p>
+                        <!-- <div style="color: #6C757D; font-size: 0.8em;">Liked by 5 people</div> -->
+                        <div
+                            style="
+                                color: #6c757d;
+                                font-size: 0.8em;
+                                display: flex;
+                                gap: 4px;
+                            "
+                        >
+                            about 2 hour ago
+                            <div style="font-weight: 400; color: black">
+                                Like
+                            </div>
+                            <div style="font-weight: 400; color: black">
+                                Reply
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Input for new comment -->
+                    <div
+                        style="
+                            margin-top: 16px;
+                            display: flex;
+                            justify-content: space-between;
+                            border-radius: 90px;
+                            border: 1px solid #ced4da;
+                            padding: 8px;
+                        "
+                    >
+                        <input
+                            type="text"
+                            placeholder="Share your thoughts"
+                            style="flex-grow: 1; border: none; outline: none"
+                        />
+                        <button
+                            style="
+                                padding: 8px 16px;
+                                width: fit-content;
+                                border-radius: 90px;
+                                background-color: #19d2c7;
+                                color: white;
+                                border: none;
+                                white-space: nowrap;
+                            "
+                        >
+                            Post it!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Responsive Modal Width -->
+<style>
+    @media (max-width: 768px) {
+        .modal-dialog {
+            max-width: 90%;
+        }
+    }
+    @media (max-width: 576px) {
+        .modal-dialog {
+            max-width: 100%;
+            margin: 0 10px;
+        }
+    }
+</style>

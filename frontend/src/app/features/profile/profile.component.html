@@ -1,0 +1,138 @@
+<div class="feed-container">
+    <div style="width: 70%; margin: auto">
+        <div class="feed-header">
+            <div
+                style="
+                    display: flex;
+                    gap: 12px;
+                    align-items: center;
+                    padding-bottom: 12px;
+                    padding-left: 25px;
+                    padding-right: 25px;
+                "
+            >
+                <div
+                    style="
+                        width: 48px;
+                        height: 48px;
+                        border-radius: 100%;
+                        background-color: #cccccc;
+                        overflow: hidden;
+                    "
+                >
+                    <!-- <img
+                        src="path-to-user-image.jpg"
+                        alt="User"
+                        style="width: 100%; object-fit: cover"
+                    /> -->
+                </div>
+                <div>
+                    <div style="">Osbaldo Beahan</div>
+                </div>
+
+                <div style="display: flex; margin-left: auto; gap: 10px">
+                    <div
+                        style="
+                            display: flex;
+                            flex-direction: column;
+                            gap: 2px;
+                            align-items: center;
+                        "
+                    >
+                        <div style="">1212</div>
+                        <div style="font-weight: 700">Posts</div>
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            flex-direction: column;
+                            gap: 2px;
+                            align-items: center;
+                        "
+                    >
+                        <div style="">5678</div>
+                        <div style="font-weight: 700">Followers</div>
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            flex-direction: column;
+                            gap: 2px;
+                            align-items: center;
+                        "
+                    >
+                        <div style="">878</div>
+                        <div style="font-weight: 700">Following</div>
+                    </div>
+                    <div
+                        style="padding-left: 16px; min-width: 25px"
+                        (click)="openModal()"
+                    >
+                        <img
+                            src="assets/Icons.svg"
+                            alt="User"
+                            style="width: 100%; object-fit: cover"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="posts-grid">
+            <ng-container *ngFor="let post of posts">
+                <app-post-card [post]="post"></app-post-card>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="addModal" tabindex="-1" onclick="closeModal()">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="modal-title">Add A New Post</p>
+                <form class="modal-form">
+                    <label for="postTitle" class="input-label">Title</label>
+                    <input
+                        type="text"
+                        id="postTitle"
+                        class="input-field"
+                        placeholder="Enter your title"
+                    />
+
+                    <label for="postDescription" class="input-label"
+                        >Description</label
+                    >
+                    <textarea
+                        id="postDescription"
+                        class="input-field"
+                        placeholder="Enter your description"
+                    ></textarea>
+
+                    <div class="file-upload-container">
+                        <label for="fileUpload" class="file-upload-label">
+                            Choose a file
+                            <input
+                                type="file"
+                                id="fileUpload"
+                                class="file-upload-input"
+                            />
+                        </label>
+                        <span id="file-chosen">No file chosen</span>
+                    </div>
+
+                    <div class="modal-buttons">
+                        <button type="submit" class="submit-btn">Submit</button>
+                        <button
+                            type="button"
+                            class="cancel-btn"
+                            (click)="closeModal()"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
