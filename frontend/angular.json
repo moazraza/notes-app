@@ -94,12 +94,8 @@
                 }
             }
         }
+    },
+    "cli": {
+      "analytics": "ca26e0e3-c3e1-4c6b-b279-cc20141bd290"
     }
-<<<<<<< HEAD
-  },
-  "cli": {
-    "analytics": "4041413b-6493-433d-9586-96eb5f7ba14f"
-  }
-=======
->>>>>>> origin/dev
 }

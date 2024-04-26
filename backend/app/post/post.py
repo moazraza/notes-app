@@ -7,7 +7,7 @@ from ..model.models import *
 from ..post.forms import PostForm
 from bson import ObjectId
 from ..auth.auth import login_required
-from backend.utilities import upload_files
+from utilities import upload_files
 from mongoengine.errors import DoesNotExist
 
 
@@ -86,9 +86,7 @@ def post_query():
 
         post_data_list.append({
             'title': post.title,
-            'content': post.content,
-            'user': username,
-            'image_paths': post.image_paths
+            'content': post.content
         })
 
     logging.debug("Fetched Posts Data: %s", post_data_list)
