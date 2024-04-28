@@ -43,9 +43,9 @@ def verify_token(token):
         g.user_id = user_id
         return True
     except jwt.ExpiredSignatureError:
-        raise Exception("token expired")
+        return jsonify({'message': 'token expired'}), 400
     except jwt.InvalidTokenError:
-        raise Exception("token incorrect")
+        return jsonify({'message': 'token incorrect'}), 400
 
 def login_required(func):
     @functools.wraps(func)
