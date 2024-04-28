@@ -7,7 +7,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class PostsService {
 
-    private apiUrl = 'http://localhost:5000/get_post';
+    private apiUrl = 'http://127.0.0.1:5000/get_post';
 
     constructor(private http: HttpClient) {
     }

@@ -86,9 +86,7 @@ def post_query():
 
         post_data_list.append({
             'title': post.title,
-            'content': post.content,
-            'user': username,
-            'image_paths': post.image_paths
+            'content': post.content
         })
 
     logging.debug("Fetched Posts Data: %s", post_data_list)
