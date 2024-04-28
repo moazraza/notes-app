@@ -25,8 +25,9 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "src/styles.css"
+                          "@angular/material/prebuilt-themes/indigo-pink.css",
+                          "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                          "src/styles.css"
                         ],
                         "scripts": [
                             "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
@@ -87,7 +88,8 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.css"
+                          "@angular/material/prebuilt-themes/indigo-pink.css",
+                          "src/styles.css"
                         ],
                         "scripts": []
                     }
@@ -96,6 +98,6 @@
         }
     },
     "cli": {
-      "analytics": "ca26e0e3-c3e1-4c6b-b279-cc20141bd290"
+      "analytics": "b3b4b7fa-1116-4d8c-8e08-227ba12a2d79"
     }
 }

@@ -1,24 +1,43 @@
-import {provideRouter, Routes, withComponentInputBinding} from '@angular/router';
-import {HomeComponent} from "./features/home/home.component";
-import {ProfileComponent} from "./features/profile/profile.component";
-import {ApplicationConfig} from "@angular/core";
+import {
+    provideRouter,
+    Routes,
+    withComponentInputBinding,
+} from '@angular/router';
+import { HomeComponent } from './features/home/home.component';
+import { ProfileComponent } from './features/profile/profile.component';
+import { ApplicationConfig } from '@angular/core';
+import { SearchComponent } from './features/search/search.component';
+import {LoginComponent} from "./shared/components/login/login.component";
+import {RegisterComponent} from "./shared/components/register/register.component";
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
+        redirectTo: 'login',
+        pathMatch: 'full',
     },
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+    },
+    {
+        path: 'search',
+        component: SearchComponent,
     },
     {
         path: 'profile',
-        component: ProfileComponent
-    }
+        component: ProfileComponent,
+    },
+    {
+        path: 'login',
+        component: LoginComponent,
+    },
+    {
+        path: 'signup',
+        component: RegisterComponent,
+    },
 ];
 
 export const appConfig: ApplicationConfig = {
-    providers: [provideRouter(routes, withComponentInputBinding())]
+    providers: [provideRouter(routes, withComponentInputBinding())],
 };

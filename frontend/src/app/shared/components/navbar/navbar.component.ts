@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {NgOptimizedImage} from "@angular/common";
 
 @Component({
@@ -20,5 +20,12 @@ export class NavbarComponent {
   toggleSearchBar(): void {
     this.showSearchBar = !this.showSearchBar;
   }
+  constructor(private router: Router) {}
+
+    navigateToSearchPage() {
+        // Navigate to the search page
+        this.router.navigateByUrl('/search');
+    }
+
 
 }

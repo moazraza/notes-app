@@ -1,0 +1,48 @@
+.feed-container {
+    padding: 40px;
+    background-image: url('../../../assets/gray-gradient.png');
+
+  }
+
+  .feed-header {
+    margin-bottom: 20px;
+  }
+
+ /* Base style for .posts-grid - applies unless overridden by media queries */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns for large screens */
+    gap: 20px;
+    justify-content: center;
+  }
+
+  /* Laptop screens (usually 1024px to 1440px) */
+  @media (max-width: 1440px) {
+    .posts-grid {
+      grid-template-columns: repeat(4, 1fr); /* 4 columns for smaller laptops */
+    }
+  }
+
+  /* Tablet screens (usually 768px to 1023px) */
+  @media (max-width: 1023px) {
+    .posts-grid {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns for tablets */
+    }
+  }
+
+  /* Smaller tablet screens (around 600px to 767px) */
+  @media (max-width: 767px) {
+    .posts-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller tablets */
+    }
+  }
+
+  /* Mobile screens (usually less than 600px) */
+  @media (max-width: 599px) {
+    .posts-grid {
+      grid-template-columns: 1fr; /* 1 column for mobile screens */
+    }
+  }
+
+
+  /* This is the basic structure and you may need to adjust colors, sizes, fonts, etc., to match your Figma design exactly */

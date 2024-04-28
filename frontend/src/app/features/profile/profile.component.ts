@@ -7,7 +7,7 @@ import {HttpClientModule} from "@angular/common/http";
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [       
+  imports: [
       NgForOf,
       PostCardComponent,
       NgIf,
@@ -27,4 +27,19 @@ export class ProfileComponent {
     {'title': '1234', 'content': '677'}
   ];
 
+    openModal() {
+        console.log('herein the function');
+
+        const modalDiv = document.getElementById('addModal');
+        if (modalDiv != null) {
+            modalDiv.style.display = 'block';
+        }
+    }
+
+    closeModal() {
+        const modalDiv = document.getElementById('addModal');
+        if (modalDiv != null) {
+            modalDiv.style.display = 'none';
+        }
+    }
 }

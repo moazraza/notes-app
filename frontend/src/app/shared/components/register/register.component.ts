@@ -8,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+username: string = '';
+  password: string = '';
 
+  constructor() { }
+
+  login() {
+    // Implement your login logic here
+    console.log('Username:', this.username);
+    console.log('Password:', this.password);
+  }
 }

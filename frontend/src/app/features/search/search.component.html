@@ -1,1 +1,10 @@
-<p>search works!</p>
+<div class="feed-container">
+    <div class="feed-header">
+      <h1>Search results</h1>
+    </div>
+    <div class="posts-grid">
+      <ng-container *ngFor="let res of searchResults">
+        <app-post-card [post]="res"></app-post-card>
+      </ng-container>
+    </div>
+  </div>
