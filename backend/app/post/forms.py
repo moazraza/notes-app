@@ -5,3 +5,7 @@ from wtforms.validators import DataRequired
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = StringField('Content', validators=[DataRequired()])
+
+class ReviewForm(FlaskForm):
+    content = StringField('Content', validators=[DataRequired()])
+    postId = StringField('PostId', validators=[DataRequired()])
