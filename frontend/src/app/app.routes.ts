@@ -9,6 +9,7 @@ import { ApplicationConfig } from '@angular/core';
 import { SearchComponent } from './features/search/search.component';
 import {LoginComponent} from "./shared/components/login/login.component";
 import {RegisterComponent} from "./shared/components/register/register.component";
+import {BookmarksComponent} from "./features/bookmarks/bookmarks.component";
 
 export const routes: Routes = [
     {
@@ -36,6 +37,10 @@ export const routes: Routes = [
         path: 'signup',
         component: RegisterComponent,
     },
+    {
+        path: 'bookmarks',
+        component: BookmarksComponent
+    }
 ];
 
 export const appConfig: ApplicationConfig = {
