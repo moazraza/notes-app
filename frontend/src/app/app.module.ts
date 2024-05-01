@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -17,9 +18,10 @@ import {MatFormFieldModule} from "@angular/material/form-field";
         BrowserAnimationsModule,
         MatInputModule,
         MatButtonModule,
-        MatFormFieldModule
-
+        MatFormFieldModule,
+        HttpClientModule
     ],
+    exports: [],
     providers: [],
     bootstrap: []
 })
