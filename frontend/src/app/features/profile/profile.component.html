@@ -1,32 +1,37 @@
-
-  <div class = 'title-line'>
+<div class='title-line'>
     <div class="author">
-        <img class="thumbnail" src="assets/images.jpeg" >
+        <img class="thumbnail" src="assets/images.jpeg">
         <p>Becki Jia</p>
     </div>
 
     <div class="data">
-      <div class="data-posts">
-        <p>1,234</p>
-        <p style="font-weight: bold">Posts</p>
-      </div>
+        <div class="data-posts">
+            <p>1,234</p>
+            <p style="font-weight: bold">Posts</p>
+        </div>
 
-      <div class="data-posts">
-        <p>5,678</p>
-        <p style="font-weight: bold">Followers</p>
-      </div>
+        <div class="data-posts">
+            <p>5,678</p>
+            <p style="font-weight: bold">Followers</p>
+        </div>
 
-      <div class="data-posts">
-        <p>9,101</p>
-        <p style="font-weight: bold">Following</p>
-      </div>
+        <div class="data-posts">
+            <p>9,101</p>
+            <p style="font-weight: bold">Following</p>
+        </div>
 
     </div>
 
-    <div class="button-plus-div">
-      <button class="btn btn-primary btn-lg" (click)="openModal()">+</button>
+    <div class="buttons">
+        <button class="btn btn-dark btn-lg">
+            <a routerLink="/bookmarks" routerLinkActive="active">
+                <i class="fa fa-bookmark"></i>
+            </a>
+        </button>
+        <button class="btn btn-primary btn-lg" (click)="openModal()">+</button>
     </div>
-  </div>
+
+</div>
 
 <div class="container">
     <div class="row">
@@ -51,7 +56,7 @@
                     />
 
                     <label for="postDescription" class="input-label"
-                        >Description</label
+                    >Description</label
                     >
                     <textarea
                         id="postDescription"

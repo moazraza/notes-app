@@ -1,10 +1,10 @@
 from flask import Flask,Blueprint,request,jsonify,send_from_directory,session,g
 from ..model.models import *
 from werkzeug.security import generate_password_hash
-from backend.config import ICON_UPLOADED_FILE_PATH
+from config import ICON_UPLOADED_FILE_PATH
 from ..auth.auth import login_required
 from ..user.forms import RegistrationForm
-from backend.utilities import upload_files
+from utilities import upload_files
 app = Flask(__name__)
 user_db = Blueprint('user_db', __name__)
 

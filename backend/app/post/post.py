@@ -5,9 +5,9 @@ from ..model.models import *
 from ..post.forms import PostForm,ReviewForm
 from bson import ObjectId
 from ..auth.auth import login_required
-from backend.utilities import upload_files
+from utilities import upload_files
 from mongoengine.errors import DoesNotExist
-from backend.config import POST_UPLOADED_FILE_PATH,ICON_UPLOADED_FILE_PATH
+from config import POST_UPLOADED_FILE_PATH,ICON_UPLOADED_FILE_PATH
 
 
 app = Flask(__name__)
