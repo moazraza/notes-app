@@ -14,6 +14,7 @@
     grid-template-columns: repeat(5, 1fr); /* 5 columns for large screens */
     gap: 20px;
     justify-content: center;
+    margin-top: 50px;
 }
 
 /* Laptop screens (usually 1024px to 1440px) */
@@ -44,3 +45,17 @@
     }
 }
 
+
+.bookmark-header .back-button {
+    background: none;
+    border: none;
+    color: #007bff;  /* Bootstrap primary blue, adjust as needed */
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.bookmark-header .back-button i {
+    margin-right: 5px; /* space between icon and text */
+}

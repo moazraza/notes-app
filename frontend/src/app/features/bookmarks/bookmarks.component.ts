@@ -1,30 +1,29 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {PostCardComponent} from "../posts/post-card/post-card.component";
 import {PostsService} from "../../services/posts.service";
 import {HttpClientModule} from "@angular/common/http";
-import {AuthService} from "../../core/auth/service/auth.service";
-import { Router } from '@angular/router';
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-bookmarks',
     standalone: true,
     imports: [
         NgForOf,
         PostCardComponent,
         NgIf,
-        HttpClientModule
+        HttpClientModule,
+        RouterLink,
+        RouterLinkActive
     ],
-    providers: [PostsService, AuthService],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.css'
+    providers: [PostsService],
+    templateUrl: './bookmarks.component.html',
+    styleUrl: './bookmarks.component.css'
 })
-export class HomeComponent implements OnInit {
-
+export class BookmarksComponent {
     posts: any[] = [];
 
-
-    constructor(private postsService: PostsService, private authService: AuthService, private router: Router) {
+    constructor(private postsService: PostsService) {
         this.postsService.getPosts().subscribe({
             next: (data) => {
                 this.posts = data;
@@ -35,13 +34,5 @@ export class HomeComponent implements OnInit {
             }
         });
     }
-
-    ngOnInit(): void {
-        if (!this.authService.currentUserValue) {
-            this.authService.logout();
-            this.router.navigate(['/login']);
-        }
-    }
-
 
 }

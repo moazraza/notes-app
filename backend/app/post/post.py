@@ -5,10 +5,10 @@ from ..model.models import *
 from ..post.forms import PostForm,ReviewForm,gpt_validate
 from bson import ObjectId
 from ..auth.auth import login_required
-from backend.utilities import upload_files
+from utilities import upload_files
 from mongoengine.errors import DoesNotExist
-from backend.config import POST_UPLOADED_FILE_PATH,ICON_UPLOADED_FILE_PATH
-from backend.gpt_function import gpt_interpreter
+from gpt_function import gpt_interpreter
+from config import POST_UPLOADED_FILE_PATH,ICON_UPLOADED_FILE_PATH
 
 app = Flask(__name__)
 post_db = Blueprint('post_db', __name__)
