@@ -9,3 +9,6 @@ class PostForm(FlaskForm):
 class ReviewForm(FlaskForm):
     content = StringField('Content', validators=[DataRequired()])
     postId = StringField('PostId', validators=[DataRequired()])
+
+class gpt_validate(FlaskForm):
+    content = StringField('Content', validators=[DataRequired()])
