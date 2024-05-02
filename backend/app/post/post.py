@@ -1,13 +1,13 @@
 import logging
 from flask import Flask,Blueprint,request,g,jsonify,session,send_from_directory
-from ..model.models import *
-# from backend.app.model.models import *
+#from ..model.models import *
+from app.model.models import *
 from ..post.forms import PostForm,ReviewForm
 from bson import ObjectId
 from ..auth.auth import login_required
-from backend.utilities import upload_files
+from utilities import upload_files
 from mongoengine.errors import DoesNotExist
-from backend.config import POST_UPLOADED_FILE_PATH,ICON_UPLOADED_FILE_PATH
+from config import POST_UPLOADED_FILE_PATH,ICON_UPLOADED_FILE_PATH
 
 
 app = Flask(__name__)
@@ -147,3 +147,20 @@ def post_query():
     logging.debug("Fetched Posts Data: %s", post_data_list)
 
     return jsonify(post_data_list), 200
+
+
+
+@post_db.route('/like', methods=['POST'])
+@login_required
+def like_post():
+    post_id = request.form.get('post_id')
+
+    if Like.objects(user=g.user_id, post=post_id).count > 0:
+        return jsonify({'message': 'You have already liked this post'}), 400
+
+    like = Like(user = g.user_id, post = post_id)
+    like.save()
+    return jsonify({'message': 'Post liked successfully'}), 201
+
+
+
