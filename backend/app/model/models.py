@@ -6,7 +6,7 @@ import jwt
 
 
 class User(Document):
-    username = StringField(required=True, unique=False)
+    username = StringField(required=True, unique=True)
     email = StringField(required=True, unique=True)
     password = StringField(required=True)
     icon = StringField(required=False)
@@ -34,13 +34,23 @@ class Post(Document):
     content = StringField(required=True)
     user = ReferenceField(User, reverse_delete_rule='CASCADE')
     image_paths = ListField(StringField())
+    image_path = ListField(StringField())  # fix to use only one
+    image_ids = ListField(StringField())  # Store GridFS file IDs
     likes = ReferenceField('Like')
     bookmarks = ReferenceField('Bookmark')
     comments = ReferenceField('Comment')
     tags = ListField(StringField())
     created_at = DateTimeField(default=datetime.utcnow)
     updated_at = DateTimeField(default=datetime.utcnow)
-    meta = {'collection': 'posts'}
+    meta = {
+        'collection': 'posts',
+        'indexes': [
+            {'fields': ['user']},
+            {'fields': ['$title', '$content', '$tags'], 'default_language': 'english',
+             'weights': {'title': 10, 'content': 5, 'tags': 7}},
+            {'fields': ['user', '-created_at']}
+        ]
+    }
 
 
 class Like(Document):

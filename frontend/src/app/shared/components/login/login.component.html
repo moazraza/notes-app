@@ -8,7 +8,7 @@
             <div>
                 <form class="mt20">
                     <span>
-                        <div>Email Address:</div>
+                        <div>Username:</div>
                         <input
                             type="text"
                             id="username"
@@ -37,59 +37,14 @@
                         <button class="loginBtn" (click)="doLogin()">Login</button>
                     </div>
 
-                    <div>
-                        <label style="margin-top: 25px">
-                            <input
-                                type="checkbox"
-                                id="remember_me_checkbox"
-                                name="remember_me"
-                                style="margin-right: 10px"
-                            />
-                            <span style="font-weight: normal"
-                                >Remember me for 30 days</span
-                            >
-                        </label>
-                    </div>
+
                 </form>
             </div>
 
-            <div style="margin: 50px 0px">
-                <img src="../../../assets/Line.png" class="seperater" />
-                OR
-                <img src="../../../assets/Line.png" class="seperater" />
-            </div>
 
-            <div style="margin-top: 8px">
-                <button class="GIcon">
-                    <img
-                        src="../../../assets/GLogo.png"
-                        alt="Google Icon"
-                        class="Icon"
-                    />
-                    Sign in with Google
-                </button>
-
-                <button
-                    style="
-                        background-color: white;
-                        color: black;
-                        border: none;
-                        border-radius: 10px;
-                        padding: 4px 10px;
-                        font-weight: bold;
-                    "
-                >
-                    <img
-                        src="../../../assets/appleLogo.png"
-                        alt="Apple Icon"
-                        class="Icon"
-                    />
-                    Sign in with Apple
-                </button>
-            </div>
 
             <div style="padding-top: 20px">
-                Don’t have an account? <a href="./signup">Sign Up</a>
+                Don’t have an account? <a routerLink="/register" routerLinkActive="active">Register</a>
             </div>
         </div>
     </div>

@@ -1,4 +1,8 @@
-from flask import Flask,Blueprint,request,jsonify,send_from_directory,session,g
+import base64
+import logging
+
+from bson import ObjectId
+from flask import Flask, Blueprint, request, jsonify, send_from_directory, session, g, current_app
 from ..model.models import *
 from werkzeug.security import generate_password_hash
 from config import ICON_UPLOADED_FILE_PATH
@@ -63,11 +67,14 @@ def user_register():
         username = form.username.data
         email = form.email.data
         password = form.password.data
-        if 'file' not in request.files:
-            return jsonify({'message': 'No file part in the request'}), 400
-        file = request.files.get("file")
-        upload_result = upload_files(file, tag="icon")
-        new_filename = upload_result[0]
+        full_name = form.full_name.data
+        bio = form.bio.data
+
+        # if 'file' not in request.files:
+        #     return jsonify({'message': 'No file part in the request'}), 400
+        # file = request.files.get("file")
+        # upload_result = upload_files(file, tag="icon")
+        # new_filename = upload_result[0]
 
         if User.objects(username=username).first():
             return jsonify({'message': 'The user name has been registered'}), 409
@@ -79,12 +86,24 @@ def user_register():
             username=username,
             email=email,
             password=generate_password_hash(password),
-            icon=new_filename,
+            # icon=new_filename,
+            full_name=full_name,
+            bio=bio,
             created_at=datetime.utcnow(),
             updated_at=datetime.utcnow()
         )
         new_user.save()
-        return jsonify({'message': 'success'}), 201
+
+        user = User.objects(username=username).first()
+        if user is None:
+            logging.debug('user not created')
+            return jsonify({'message': 'User could not be registered'}), 400
+
+        token = user.create_token()
+        user.token = token
+        user.save()
+        logging.debug('login success')
+        return jsonify({'username': user.username, 'email': user.email, 'token': token}), 201
     else:
         return jsonify({'message': 'form validate failed', 'errors': form.errors}), 400
 
@@ -127,6 +146,48 @@ def user_query_by_username(username):
             }
         }
     ), 200
+
+
+# get all posts of a user
+@user_db.route('/user/<username>/posts', methods=['GET'])
+@login_required
+def user_posts(username):
+    user = User.objects(username=username).first()
+    if not user:
+        return jsonify({'message': 'User does not exist'}), 404
+
+    results = []
+    user_data = {
+        'username': user.username,
+        'email': user.email,
+        'icon': user.icon,
+        'bio': user.bio,
+        'full_name': user.full_name
+    }
+    results.append(user_data)
+    posts_data = Post.objects(user=user)
+    posts_data_list = []
+    for post in posts_data:
+        images = []
+        for image_id in post.image_ids:
+            image = current_app.config['GRIDFS'].get(ObjectId(image_id))
+            image_base64 = base64.b64encode(image.read()).decode('utf-8')
+            images.append(image_base64)
+        likes_count = Like.objects(post=post).count()
+        comments_count = Comment.objects(post=post).count()
+        post_data = {
+            'id': str(post.id),
+            'title': post.title,
+            'user': post.user.username,
+            'likes': likes_count,
+            'comments': comments_count,
+            'tags': post.tags,
+            'images': images
+        }
+        posts_data_list.append(post_data)
+    results.append(posts_data_list)
+
+    return jsonify(results), 200
 
 
 @login_required

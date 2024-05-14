@@ -7,13 +7,15 @@
 
         <div class="d-flex order-lg-3 justify-content-center ms-auto ">
             <!-- Search icon for mobile -->
-            <a class="nav-link navbar-search-icon d-lg-none"  (click)="toggleSearchBar()" [class.d-none]="showSearchBar">
+            <a class="nav-link navbar-search-icon d-lg-none" (click)="toggleSearchBar()" [class.d-none]="showSearchBar">
                 <i class="fa fa-search"></i>
             </a>
 
             <!-- Search bar for mobile -->
             <div class="d-lg-none" [class.d-none]="!showSearchBar">
-                <input class="form-control me-2" (keyup.enter)="navigateToSearchPage()" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2" (keyup.enter)="navigateToSearchPage()"
+                       type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchQuery"
+                       [ngModelOptions]="{standalone: true}"/>
             </div>
 
 
@@ -28,25 +30,34 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <!-- Search bar centered -->
             <div class="mx-auto d-none d-lg-block navbar-search">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search" (keyup.enter)="navigateToSearchPage()">
+                <input class="form-control me-2" (keyup.enter)="navigateToSearchPage()"
+                       type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchQuery"
+                       [ngModelOptions]="{standalone: true}"/>
             </div>
 
             <!-- Navbar links on the right -->
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a class="nav-link" routerLink="/signup" routerLinkActive="active">SignUp</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
-                </li>
-                <li class="nav-item">
+                </li>-->
+                <li class="nav-item" *ngIf="localStorage.getItem('user')">
                     <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="localStorage.getItem('user')">
                     <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" (click)="logout()">Logout</a>
+                <li class="nav-item" *ngIf="localStorage.getItem('user')">
+                    <a routerLink="/signup" class="navbar-icon">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="!localStorage.getItem('user')">
+                    <a routerLink="/register" class="navbar-icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </a>
                 </li>
             </ul>
         </div>

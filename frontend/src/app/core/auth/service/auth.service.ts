@@ -24,6 +24,18 @@ export class AuthService {
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('token', user.token);
+                this.currentUserSubject.next(user);
+                return user;
+            }));
+    }
+
+    register(formData: FormData) {
+        return this.http.post<any>('http://127.0.0.1:5000/register', formData)
+            .pipe(map(user => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('token', user.token);
                 this.currentUserSubject.next(user);
                 return user;
             }));
