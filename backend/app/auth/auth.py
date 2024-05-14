@@ -35,7 +35,7 @@ def login():
         user.token = token
         user.save()
         logging.debug('login success')
-        return jsonify({'username': user.username, 'email': user.email, 'token': token})
+        return jsonify({'username': user.username, 'email': user.email, 'token': token}), 200
     else:
         return jsonify({'message': 'failed', 'errors': form.errors}), 400
 

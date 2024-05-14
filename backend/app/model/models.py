@@ -6,7 +6,7 @@ import jwt
 
 
 class User(Document):
-    username = StringField(required=True, unique=False)
+    username = StringField(required=True, unique=True)
     email = StringField(required=True, unique=True)
     password = StringField(required=True)
     icon = StringField(required=False)
@@ -34,6 +34,8 @@ class Post(Document):
     content = StringField(required=True)
     user = ReferenceField(User, reverse_delete_rule='CASCADE')
     image_paths = ListField(StringField())
+    image_path = ListField(StringField())  # fix to use only one
+    image_ids = ListField(StringField())  # Store GridFS file IDs
     likes = ReferenceField('Like')
     bookmarks = ReferenceField('Bookmark')
     comments = ReferenceField('Comment')

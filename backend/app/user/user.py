@@ -1,3 +1,5 @@
+import logging
+
 from flask import Flask,Blueprint,request,jsonify,send_from_directory,session,g
 from ..model.models import *
 from werkzeug.security import generate_password_hash
@@ -16,11 +18,14 @@ def user_register():
         username = form.username.data
         email = form.email.data
         password = form.password.data
-        if 'file' not in request.files:
-            return jsonify({'message': 'No file part in the request'}), 400
-        file = request.files.get("file")
-        upload_result = upload_files(file, tag="icon")
-        new_filename = upload_result[0]
+        full_name = form.full_name.data
+        bio = form.bio.data
+
+        # if 'file' not in request.files:
+        #     return jsonify({'message': 'No file part in the request'}), 400
+        # file = request.files.get("file")
+        # upload_result = upload_files(file, tag="icon")
+        # new_filename = upload_result[0]
 
         if User.objects(username=username).first():
             return jsonify({'message': 'The user name has been registered'}), 409
@@ -32,12 +37,24 @@ def user_register():
             username=username,
             email=email,
             password=generate_password_hash(password),
-            icon=new_filename,
+            # icon=new_filename,
+            full_name=full_name,
+            bio=bio,
             created_at=datetime.utcnow(),
             updated_at=datetime.utcnow()
         )
         new_user.save()
-        return jsonify({'message': 'success'}), 201
+
+        user = User.objects(username=username).first()
+        if user is None:
+            logging.debug('user not created')
+            return jsonify({'message': 'User could not be registered'}), 400
+
+        token = user.create_token()
+        user.token = token
+        user.save()
+        logging.debug('login success')
+        return jsonify({'username': user.username, 'email': user.email, 'token': token}), 201
     else:
         return jsonify({'message': 'form validate failed', 'errors': form.errors}), 400
 

@@ -1,5 +1,7 @@
+import base64
 import logging
-from flask import Flask,Blueprint,request,g,jsonify,session,send_from_directory
+from flask import Flask, Blueprint, request, g, jsonify, session, send_from_directory, current_app
+from werkzeug.utils import secure_filename
 from ..model.models import *
 # from backend.app.model.models import *
 from ..post.forms import PostForm,ReviewForm
@@ -17,12 +19,13 @@ post_db = Blueprint('post_db', __name__)
 @post_db.route('/post_images', methods=['POST'])
 @login_required
 def upload_images():
-    if 'file' not in request.files:
+    if 'files' not in request.files:
         return jsonify({'message': 'No file part in the request'}), 400
-    file = request.files.get("file")
-    if file:
-        upload_result = upload_files(file,tag="notes")
+    files = request.files.get("files")
+    if files:
+        upload_result = upload_files(files, tag="notes")
         if not upload_result:
+            logging.debug("upload file failed_2")
             return jsonify({'message': 'upload file failed_2'}), 400
         new_filename =upload_result[0]
         original_filename=upload_result[1]
@@ -95,11 +98,14 @@ def get_comments():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@post_db.route('/posts', methods=['POST'])
+@post_db.route('/posts/create', methods=['POST'])
 @login_required
 def create_post():
     if request.method == "POST":
+        # data = request.get_json()
         form = PostForm(request.form)
+        logging.debug("Creating Post")
+        logging.debug(form.title.data)
         if form.validate():
             title = form.title.data
             content = form.content.data
@@ -108,15 +114,30 @@ def create_post():
             user = User.objects(id=ObjectId(user)).first()
             if not user:
                 return jsonify({'message': 'user not exist'}), 404
-            uploaded_files = session.get('uploaded_files', [])
+            # uploaded_files = session.get('uploaded_files')
             # make new post
-            print(uploaded_files)
+            # print(uploaded_files)
+            # Handle file uploads
+            image_ids = []
+            if 'files' in request.files:
+                files = request.files.getlist('files')
+                for file in files:
+                    filename = secure_filename(file.filename)
+                    file_id = current_app.config['GRIDFS'].put(file, filename=filename)
+                    image_ids.append(str(file_id))
+
+            tags = []
+            if 'tags' in request.form:
+                tags = request.form.getlist('tags')
+                logging.debug('Tags: %s', tags)
+
             # try:
             post = Post(
                 title=title,
                 content=content,
                 user=user,
-                image_paths=uploaded_files,
+                image_ids=image_ids,
+                tags=tags,
                 created_at=datetime.utcnow(),
                 updated_at=datetime.utcnow()
             )
@@ -129,7 +150,7 @@ def create_post():
 
 @post_db.route('/get_post', methods=['GET'])
 def post_query():
-    post_data = Post.objects().only('id','title', 'content', 'user', 'image_paths')
+    post_data = Post.objects().only('id','title', 'user', 'image_ids')
     post_data_list = []
 
     for post in post_data:
@@ -138,10 +159,18 @@ def post_query():
         except DoesNotExist:
             username = 'Unknown User'
 
+        # get images from GridFS
+        images = []
+        for image_id in post.image_ids:
+            image = current_app.config['GRIDFS'].get(ObjectId(image_id))
+            image_base64 = base64.b64encode(image.read()).decode('utf-8')
+            images.append(image_base64)
+
         post_data_list.append({
-            'id':str(post.id),
+            'id': str(post.id),
             'title': post.title,
-            'content': post.content
+            'user': username,
+            'images': images
         })
 
     logging.debug("Fetched Posts Data: %s", post_data_list)

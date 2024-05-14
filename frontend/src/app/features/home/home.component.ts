@@ -27,6 +27,13 @@ export class HomeComponent implements OnInit {
     constructor(private postsService: PostsService, private authService: AuthService, private router: Router) {
         this.postsService.getPosts().subscribe({
             next: (data) => {
+                if (data) {
+                    data.forEach((post: any) => {
+                        if (post.images) {
+                            post.post_image = post.images[0];
+                        }
+                    });
+                }
                 this.posts = data;
                 console.log('data is:', this.posts);
             },

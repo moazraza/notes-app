@@ -41,7 +41,7 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal" id="addModal" tabindex="-1" onclick="closeModal()">
+<div class="modal" id="addModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -53,6 +53,8 @@
                         id="postTitle"
                         class="input-field"
                         placeholder="Enter your title"
+                        [(ngModel)]="postTitle"
+                        [ngModelOptions]="{standalone: true}"
                     />
 
                     <label for="postDescription" class="input-label"
@@ -62,6 +64,8 @@
                         id="postDescription"
                         class="input-field"
                         placeholder="Enter your description"
+                        [(ngModel)]="postDescription"
+                        [ngModelOptions]="{standalone: true}"
                     ></textarea>
 
                     <div class="file-upload-container">
@@ -71,17 +75,19 @@
                                 type="file"
                                 id="fileUpload"
                                 class="file-upload-input"
+                                (change)="onFileSelected($event)"
+                                multiple
                             />
                         </label>
-                        <span id="file-chosen">No file chosen</span>
+                        <span id="file-chosen">{{fileChosenText}}</span>
                     </div>
 
                     <div class="modal-buttons">
-                        <button type="submit" class="submit-btn">Submit</button>
+                        <button type="button" class="submit-btn" (click)="submitAndCloseModal()">Submit</button>
                         <button
                             type="button"
                             class="cancel-btn"
-                            (click)="closeModal()"
+                            (click)="closeModal($event, true)"
                         >
                             Cancel
                         </button>

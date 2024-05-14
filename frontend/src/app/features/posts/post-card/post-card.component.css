@@ -37,7 +37,7 @@
     margin-bottom: 10px;
     display: flex;
     gap: 12px;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 .post-stats span {
@@ -45,14 +45,27 @@
 }
 
 .post-title {
-    font-size: 1.1em;
+    font-size: 1.2em;
     margin-bottom: 5px;
-    font-weight: 600;
+    font-weight: 500;
     color: #182135;
 }
 
-.post-description {
-    font-size: 12px;
-    font-weight: 400;
-    color: #182135;
+.post-user {
+    font-size: 1em;
+    font-style: italic;
+    margin-bottom: 1px;
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Adds space between tags */
+}
+
+.post-tags span {
+    background-color: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 0.85em;
 }
