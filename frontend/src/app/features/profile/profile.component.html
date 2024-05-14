@@ -1,42 +1,51 @@
+<div *ngIf="loading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!loading">
+    <div class='title-line'>
+        <div class="author">
+            <img class="thumbnail" src="assets/images.jpeg">
+            <p>{{ user.full_name }}</p>
+        </div>
 
-  <div class = 'title-line'>
-    <div class="author">
-        <img class="thumbnail" src="assets/images.jpeg" >
-        <p>Becki Jia</p>
+        <div class="data">
+            <div class="data-posts">
+                <p>1,234</p>
+                <p style="font-weight: bold">Posts</p>
+            </div>
+
+            <div class="data-posts">
+                <p>5,678</p>
+                <p style="font-weight: bold">Followers</p>
+            </div>
+
+            <div class="data-posts">
+                <p>9,101</p>
+                <p style="font-weight: bold">Following</p>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-dark btn-lg">
+                <a routerLink="/bookmarks" routerLinkActive="active">
+                    <i class="fa fa-bookmark"></i>
+                </a>
+            </button>
+            <button class="btn btn-primary btn-lg" (click)="openModal()">+</button>
+        </div>
+
     </div>
-
-    <div class="data">
-      <div class="data-posts">
-        <p>1,234</p>
-        <p style="font-weight: bold">Posts</p>
-      </div>
-
-      <div class="data-posts">
-        <p>5,678</p>
-        <p style="font-weight: bold">Followers</p>
-      </div>
-
-      <div class="data-posts">
-        <p>9,101</p>
-        <p style="font-weight: bold">Following</p>
-      </div>
-
-    </div>
-
-    <div class="button-plus-div">
-      <button class="btn btn-primary btn-lg" (click)="openModal()">+</button>
-    </div>
-  </div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-3" *ngFor="let post of posts">
-            <app-post-card [post]="post"></app-post-card>
+    <div class="feed-container" *ngIf="!loading">
+        <div class="posts-grid">
+            <ng-container *ngFor="let post of posts">
+                <app-post-card [post]="post"></app-post-card>
+            </ng-container>
         </div>
     </div>
 </div>
 <!-- Modal -->
-<div class="modal" id="addModal" tabindex="-1" onclick="closeModal()">
+<div class="modal" id="addModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -48,15 +57,19 @@
                         id="postTitle"
                         class="input-field"
                         placeholder="Enter your title"
+                        [(ngModel)]="postTitle"
+                        [ngModelOptions]="{standalone: true}"
                     />
 
                     <label for="postDescription" class="input-label"
-                        >Description</label
+                    >Description</label
                     >
                     <textarea
                         id="postDescription"
                         class="input-field"
                         placeholder="Enter your description"
+                        [(ngModel)]="postDescription"
+                        [ngModelOptions]="{standalone: true}"
                     ></textarea>
 
                     <div class="file-upload-container">
@@ -66,17 +79,19 @@
                                 type="file"
                                 id="fileUpload"
                                 class="file-upload-input"
+                                (change)="onFileSelected($event)"
+                                multiple
                             />
                         </label>
-                        <span id="file-chosen">No file chosen</span>
+                        <span id="file-chosen">{{ fileChosenText }}</span>
                     </div>
 
                     <div class="modal-buttons">
-                        <button type="submit" class="submit-btn">Submit</button>
+                        <button type="button" class="submit-btn" (click)="submitAndCloseModal()">Submit</button>
                         <button
                             type="button"
                             class="cancel-btn"
-                            (click)="closeModal()"
+                            (click)="closeModal($event, true)"
                         >
                             Cancel
                         </button>

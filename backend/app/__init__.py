@@ -1,8 +1,10 @@
 import logging
 from flask import Flask
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, MongoClient
 from dotenv import load_dotenv
 import os
+
+from gridfs import GridFS
 from mongoengine import connect
 from flask_cors import CORS
 
@@ -20,12 +22,17 @@ def create_app():
     app.config['WTF_CSRF_ENABLED'] = False
     # mongo = PyMongo(app)
     mongo_db = connect('notes', host=app.config['MONGO_URI'])
+    client = MongoClient(app.config['MONGO_URI'])
+    db = client.get_default_database()
+    app.config['GRIDFS'] = GridFS(db)
     with app.app_context():
         # Import routes of our application
         from .routes import main
         from .user.user import user_db
         from .auth.auth import auth_db
         from .post.post import post_db
+        from .search.search import search_bp
+        app.register_blueprint(search_bp)
         app.register_blueprint(main)
         app.register_blueprint(user_db)
         app.register_blueprint(auth_db)

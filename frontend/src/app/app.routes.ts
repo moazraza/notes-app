@@ -9,35 +9,41 @@ import { ApplicationConfig } from '@angular/core';
 import { SearchComponent } from './features/search/search.component';
 import {LoginComponent} from "./shared/components/login/login.component";
 import {RegisterComponent} from "./shared/components/register/register.component";
+import {BookmarksComponent} from "./features/bookmarks/bookmarks.component";
+import {AuthGuard} from "./core/auth/guard/auth.guard";
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'home',
         pathMatch: 'full',
     },
     {
         path: 'home',
-        component: HomeComponent,
+        component: HomeComponent
     },
     {
         path: 'search',
-        component: SearchComponent,
+        component: SearchComponent
     },
     {
         path: 'profile',
-        component: ProfileComponent,
+        component: ProfileComponent
     },
     {
         path: 'login',
-        component: LoginComponent,
+        component: LoginComponent
     },
     {
-        path: 'signup',
-        component: RegisterComponent,
+        path: 'register',
+        component: RegisterComponent
     },
+    {
+        path: 'bookmarks',
+        component: BookmarksComponent
+    }
 ];
 
-export const appConfig: ApplicationConfig = {
+/*export const appConfig: ApplicationConfig = {
     providers: [provideRouter(routes, withComponentInputBinding())],
-};
+};*/

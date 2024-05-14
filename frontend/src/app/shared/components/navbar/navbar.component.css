@@ -9,9 +9,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: auto;
 }
-.BackgroundImg{
+
+.BackgroundImg {
     background-image: url('../../../../assets/sea-green2.png');
-    background-size: cover; /* This property ensures that the background image covers the entire element */
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -23,17 +24,17 @@
 }
 
 .navbar-brand img {
-    margin-right: 1px; /* Space between logo and brand text */
+    margin-right: 1px;
 }
 
-/* Adjust form control to fit your design */
+
 .form-control {
-    min-width: 600px; /* Set maximum width for search bar */
+    min-width: 600px;
 }
 
-/* Navbar links */
+
 .nav-link {
-    margin: 0 15px; /* Space between links */
+    margin: 0 15px;
     color: white;
 }
 
@@ -45,51 +46,62 @@
 .navbar-search {
     width: 70%;
     max-width: 300px;
-    margin: 0 auto; }
+    margin: 0 auto;
+}
 
 @media (min-width: 992px) {
     .navbar-collapse form {
-        flex-grow: 0; /* Prevent the form from growing */
-        flex-shrink: 0; /* Prevent the form from shrinking */
-        display: flex; /* Align search bar correctly */
-        justify-content: center; /* Center the search bar */
+        flex-grow: 0;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
     }
 }
 
 
 .navbar-logo {
     height: auto;
-    width: auto; /* Adjust as needed */
-    max-width: 80px; /* Adjust as needed */
+    width: auto;
+    max-width: 80px;
 }
 
-/* Navbar toggler style */
+
 .navbar-toggler {
-    margin-left: auto; /* Push toggler to the end of the navbar */
+    margin-left: auto;
 }
 
 .fa-search {
-    font-size: 1.5rem; /* Adjust the size as needed */
+    font-size: 1.5rem;
 }
 
 @media (max-width: 991px) {
-    /* Adjustments for smaller screens */
+
     .navbar-search {
-        margin-top: 0.5rem; /* Extra margin on top for mobile */
-        margin-bottom: 0.5rem; /* Extra margin at bottom for mobile */
-        width: 100%; /* Full width on small screens */
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        width: 100%;
     }
 
     .form-control {
-        min-width: 0; /* Remove minimum width */
+        min-width: 0;
     }
 
     .navbar-collapse {
-        flex-grow: 0; /* Prevent the navbar from taking too much space */
+        flex-grow: 0;
     }
 
     .navbar .nav-link {
-        padding-left: 0; /* Remove padding if needed */
+        padding-left: 0;
     }
 }
 
+.navbar-icon {
+    display: flex;
+    align-items: center;
+    color: #333333;
+    margin-right: 20px;
+}
+
+.navbar-icon i {
+    font-size: 18px;
+}

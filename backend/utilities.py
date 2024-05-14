@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 import os
 from config import POST_UPLOADED_FILE_PATH,ICON_UPLOADED_FILE_PATH,ALLOWED_EXTENSIONS
@@ -23,14 +24,19 @@ def upload_files(file,tag):
         random_filename = generate_random_filename(original_filename)
         new_filename = f"{int(timestamp)}_{random_filename}"
         if tag == "notes":
+            logging.debug("uploading notes")
             upload_path = os.path.join(POST_UPLOADED_FILE_PATH, new_filename)
         elif tag == "icon":
+            logging.debug("uploading icon")
             upload_path = os.path.join(ICON_UPLOADED_FILE_PATH, new_filename)
         else:
+            logging.debug("uploading default")
             upload_path = ""
         # image_base64 = base64.b64encode(file.read()).decode('utf-8')
         # print(image_base64)
+        logging.debug(f"uploading file to {upload_path}")
         file.save(upload_path)
+        logging.debug(f"file saved to {upload_path}")
         return new_filename, original_filename
     except Exception as e:
         return False

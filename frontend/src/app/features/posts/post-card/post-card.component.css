@@ -8,7 +8,7 @@
 
 .post-image img {
     width: 100%;
-    height: auto; /* Adjust if you want a fixed height */
+    height: auto;
 }
 
 #postModal {
@@ -18,6 +18,7 @@
 .modal-body {
     display: flex;
 }
+
 .modal-content {
     padding: 0px;
 }
@@ -32,11 +33,11 @@
 .post-stats {
     font-size: 0.9em;
     font-weight: 300;
-    color: #333; /* Adjust the color to match your design */
+    color: #333;
     margin-bottom: 10px;
     display: flex;
     gap: 12px;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 .post-stats span {
@@ -44,14 +45,63 @@
 }
 
 .post-title {
-    font-size: 1.1em;
+    font-size: 1.2em;
     margin-bottom: 5px;
-    font-weight: 600;
-    color: #182135; /* Adjust the color to match your design */
+    font-weight: 500;
+    color: #182135;
 }
 
-.post-description {
-    font-size: 12px;
-    font-weight: 400;
-    color: #182135; /* Adjust the color to match your design */
+.post-user {
+    font-size: 1em;
+    font-style: italic;
+    margin-bottom: 1px;
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Adds space between tags */
+}
+
+.post-tags span {
+    background-color: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 0.85em;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+}
+
+.card {
+    width: 250px; /* Width of the card */
+    height: 300px; /* Height of the card */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-image {
+    width: 100%; /* Full width of the card */
+    height: 150px; /* Fixed height for images */
+    object-fit: cover; /* Ensures images cover the area, are cropped to fit */
+    background-color: #f0f0f0;
+}
+
+.card-content {
+    padding: 10px;
+    flex-grow: 1; /* Takes up remaining space */
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }

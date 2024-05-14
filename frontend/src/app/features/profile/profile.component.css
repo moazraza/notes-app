@@ -1,99 +1,97 @@
 
-
-.title-line{
-  width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 50px;
-  display: grid;
-  grid-template-columns: 300px 500px 1fr;
-  justify-content: center;
-  align-items: center;
-}
-.title-line p{
-  margin-bottom: 0;
+.title-line {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 300px 500px 1fr;
+    justify-content: center;
+    align-items: center;
 }
 
-.author{
-  width: 200px;
-  height: 80px;
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  align-items: center;
-
+.title-line p {
+    margin-bottom: 0;
 }
 
-.thumbnail{
-  display: grid;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+.author {
+    width: 200px;
+    height: 80px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
 
 }
 
-.data{
-  display: grid;
-  grid-template-columns: auto auto auto;
+.thumbnail {
+    display: grid;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
 
 }
 
-.data-posts{
-  padding: 10px;
-  display: grid;
-  justify-items: center;
-  align-items:center;
+.data {
+    display: grid;
+    grid-template-columns: auto auto auto;
 
 }
 
-.button-plus-div{
-  display: grid;
-  justify-items: center;
-  align-items:center;
+.data-posts {
+    padding: 10px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
 }
 
-.button-plus{
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  font-size: 20px;
-  text-align: center;
-  padding: 0;
-  line-height: 30px;
+.button-plus-div {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.button-plus {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    text-align: center;
+    padding: 0;
+    line-height: 30px;
 
 
 }
 
 .feed-container {
     padding: 40px;
+    background-image: url('../../../assets/gray-gradient.png');
 
-    background-image: url("../../../assets/gray-gradient.png");
-    justify-content: center;
-    /* width: 90%; */
 }
 
 .feed-header {
     margin-bottom: 20px;
 }
 
-/* Base style for .posts-grid - applies unless overridden by media queries */
+
 .posts-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 5 columns for large screens */
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     justify-content: center;
 }
+
 #addModal {
     background-color: #00000029;
 }
 
 .modal {
-    /* ...existing styles... */
+
 }
 
 .modal-dialog {
     max-width: 70%;
     min-height: 80vh;
-    /* ...existing styles... */
 }
 
 .modal-content {
@@ -194,11 +192,10 @@
 }
 
 .cancel-btn {
-    /* background-color: #dc3545; */
     color: black;
 }
 
-/* Responsive Modal Width */
+
 @media (max-width: 768px) {
     .modal-dialog {
         max-width: 90%;
@@ -212,38 +209,54 @@
     }
 }
 
-/* Laptop screens (usually 1024px to 1440px) */
+
 @media (max-width: 1440px) {
     .posts-grid {
         grid-template-columns: repeat(
             3,
             1fr
-        ); /* 4 columns for smaller laptops */
+        );
     }
 }
 
-/* Tablet screens (usually 768px to 1023px) */
+
 @media (max-width: 1023px) {
     .posts-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 columns for tablets */
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
-/* Smaller tablet screens (around 600px to 767px) */
 @media (max-width: 767px) {
     .posts-grid {
         grid-template-columns: repeat(
             2,
             1fr
-        ); /* 2 columns for smaller tablets */
+        );
     }
 }
 
-/* Mobile screens (usually less than 600px) */
+
 @media (max-width: 599px) {
     .posts-grid {
-        grid-template-columns: 1fr; /* 1 column for mobile screens */
+        grid-template-columns: 1fr;
     }
 }
 
-/* This is the basic structure and you may need to adjust colors, sizes, fonts, etc., to match your Figma design exactly */
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Adjust this height as per your layout */
+}
+
+/* Ensure spinner size and color are applied */
+mat-spinner {
+  stroke: #00b3a4 !important; /* Custom teal color */
+  width: 50px !important; /* Adjust the size as needed */
+  height: 50px !important; /* Adjust the size as needed */
+}
