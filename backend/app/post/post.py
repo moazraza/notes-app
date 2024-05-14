@@ -4,13 +4,13 @@ from flask import Flask, Blueprint, request, g, jsonify, session, send_from_dire
 from werkzeug.utils import secure_filename
 from ..model.models import *
 # from backend.app.model.models import *
-from ..post.forms import PostForm,ReviewForm
+from ..post.forms import PostForm,ReviewForm,gpt_validate
 from bson import ObjectId
 from ..auth.auth import login_required
 from utilities import upload_files
 from mongoengine.errors import DoesNotExist
+from gpt_function import gpt_interpreter
 from config import POST_UPLOADED_FILE_PATH,ICON_UPLOADED_FILE_PATH
-
 
 app = Flask(__name__)
 post_db = Blueprint('post_db', __name__)
@@ -70,6 +70,18 @@ def create_comment():
             )
             comment.save()
             return jsonify({'message': 'success', 'post_id': str(post.id),'user_id': str(user.id)}), 201
+        else:
+            return jsonify({'message': 'failed', 'errors': form.errors}), 400
+
+@post_db.route('/posts/gpt', methods=['POST'])
+@login_required
+def get_gpt_answer():
+    if request.method == "POST":
+        form = gpt_validate(request.form)
+        if form.validate():
+            content = form.content.data
+            result = gpt_interpreter(content)
+            return jsonify({'message': 'success', 'gpt_answer':result}), 200
         else:
             return jsonify({'message': 'failed', 'errors': form.errors}), 400
 

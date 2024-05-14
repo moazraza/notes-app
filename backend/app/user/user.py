@@ -13,6 +13,53 @@ app = Flask(__name__)
 user_db = Blueprint('user_db', __name__)
 
 
+@user_db.route('/follow', methods=['POST'])
+@login_required
+def add_follow():
+    follower_id = g.user_id
+    following_id = request.form.get('following_id')
+
+    if follower_id == following_id:
+        return jsonify({'error': 'You cannot follow yourself'}), 400
+
+    follower = User.objects(id=follower_id).first()
+    following = User.objects(id=following_id).first()
+
+    if not follower or not following:
+        return jsonify({'error': 'Invalid user IDs'}), 404
+
+    # check repeat
+    existing_follow = Follow.objects(follower_id=follower, following_id=following).first()
+    if existing_follow:
+        return jsonify({'error': 'Already following'}), 409
+
+    follow = Follow(follower_id=follower, following_id=following).save()
+    return jsonify({'message': 'Follow successful'}), 200
+
+@user_db.route('/followers', methods=['POST'])
+@login_required
+def get_followers():
+    user_id = request.form.get('user_id')
+    user = User.objects(id=user_id).first()
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+
+    followers = Follow.objects(following_id=user)
+
+    followers_list = []
+    for f in followers:
+        if f.follower_id:
+            follower_info = {
+                'follower': f.follower_id.username,
+                'follower_id': str(f.follower_id.id)  # 转换 ObjectID 为字符串
+            }
+            followers_list.append(follower_info)
+        else:
+            followers_list.append({'follower': 'Unknown', 'follower_id': None})
+
+    return jsonify(followers_list), 200
+
+
 @user_db.route('/register', methods=['POST'])
 def user_register():
     form = RegistrationForm(request.form)
