@@ -151,12 +151,11 @@ def post_query():
 
 
 @post_db.route('/like', methods=['POST'])
-@login_required
 def like_post():
     post_id = request.form.get('post_id')
 
-    if Like.objects(user=g.user_id, post=post_id).count > 0:
-        return jsonify({'message': 'You have already liked this post'}), 400
+ #   if Like.objects(user=g.user_id, post=post_id).count > 0:
+ #       return jsonify({'message': 'You have already liked this post'}), 400
 
     like = Like(user = g.user_id, post = post_id)
     like.save()
