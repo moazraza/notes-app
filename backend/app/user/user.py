@@ -1,6 +1,8 @@
+import base64
 import logging
 
-from flask import Flask,Blueprint,request,jsonify,send_from_directory,session,g
+from bson import ObjectId
+from flask import Flask, Blueprint, request, jsonify, send_from_directory, session, g, current_app
 from ..model.models import *
 from werkzeug.security import generate_password_hash
 from config import ICON_UPLOADED_FILE_PATH
@@ -97,6 +99,48 @@ def user_query_by_username(username):
             }
         }
     ), 200
+
+
+# get all posts of a user
+@user_db.route('/user/<username>/posts', methods=['GET'])
+@login_required
+def user_posts(username):
+    user = User.objects(username=username).first()
+    if not user:
+        return jsonify({'message': 'User does not exist'}), 404
+
+    results = []
+    user_data = {
+        'username': user.username,
+        'email': user.email,
+        'icon': user.icon,
+        'bio': user.bio,
+        'full_name': user.full_name
+    }
+    results.append(user_data)
+    posts_data = Post.objects(user=user)
+    posts_data_list = []
+    for post in posts_data:
+        images = []
+        for image_id in post.image_ids:
+            image = current_app.config['GRIDFS'].get(ObjectId(image_id))
+            image_base64 = base64.b64encode(image.read()).decode('utf-8')
+            images.append(image_base64)
+        likes_count = Like.objects(post=post).count()
+        comments_count = Comment.objects(post=post).count()
+        post_data = {
+            'id': str(post.id),
+            'title': post.title,
+            'user': post.user.username,
+            'likes': likes_count,
+            'comments': comments_count,
+            'tags': post.tags,
+            'images': images
+        }
+        posts_data_list.append(post_data)
+    results.append(posts_data_list)
+
+    return jsonify(results), 200
 
 
 @login_required

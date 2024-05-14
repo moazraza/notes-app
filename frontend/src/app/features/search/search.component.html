@@ -1,6 +1,10 @@
-<div class="feed-container">
+<div *ngIf="loading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+</div>
+<div class="feed-container" *ngIf="!loading">
     <div class="feed-header">
-        <h1>Search results</h1>
+        <h1 *ngIf="found == true">Search results</h1>
+        <h1 *ngIf="found == false">No results found</h1>
     </div>
     <div class="posts-grid">
         <ng-container *ngFor="let res of results">

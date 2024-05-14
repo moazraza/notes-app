@@ -5,6 +5,7 @@ import {PostsService} from "../../services/posts.service";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
     selector: 'app-profile',
@@ -17,29 +18,42 @@ import {FormsModule} from "@angular/forms";
         RouterLink,
         RouterLinkActive,
         RouterOutlet,
-        FormsModule
+        FormsModule,
+        MatProgressSpinner
     ],
     providers: [PostsService],
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-    posts: any[] = [
-        {'title': '1234', 'content': '677'},
-        {'title': '1234', 'content': '677'},
-        {'title': '1234', 'content': '677'},
-        {'title': '1234', 'content': '677'},
-        {'title': '1234', 'content': '677'},
-        {'title': '1234', 'content': '677'},
-        {'title': '1234', 'content': '677'},
-        {'title': '1234', 'content': '677'}
-    ];
+    results: any[] = [];
+    user: any;
+    posts: any[] = [];
     postTitle: any;
     postDescription: any;
     files: File[] = [];
     fileChosenText: string = 'No file chosen';
+    loading: any;
 
     constructor(private postsService: PostsService) {
+        this.loading = true;
+        this.postsService.getPostsByUser().subscribe({
+            next: (data) => {
+                console.log('data is:', data);
+                this.user = data[0];
+                data[1].forEach((post: any) => {
+                    if (post.images) {
+                        post.post_image = post.images[0];
+                    }
+                });
+                this.posts = data[1];
+                this.loading = false;
+            },
+            error: (error) => {
+                this.loading = false;
+                console.error('error fetching posts: ', error);
+            }
+        });
     }
 
     openModal() {

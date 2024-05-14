@@ -42,7 +42,15 @@ class Post(Document):
     tags = ListField(StringField())
     created_at = DateTimeField(default=datetime.utcnow)
     updated_at = DateTimeField(default=datetime.utcnow)
-    meta = {'collection': 'posts'}
+    meta = {
+        'collection': 'posts',
+        'indexes': [
+            {'fields': ['user']},
+            {'fields': ['$title', '$content', '$tags'], 'default_language': 'english',
+             'weights': {'title': 10, 'content': 5, 'tags': 7}},
+            {'fields': ['user', '-created_at']}
+        ]
+    }
 
 
 class Like(Document):

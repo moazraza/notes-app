@@ -69,3 +69,39 @@
     border-radius: 5px;
     font-size: 0.85em;
 }
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+}
+
+.card {
+    width: 250px; /* Width of the card */
+    height: 300px; /* Height of the card */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-image {
+    width: 100%; /* Full width of the card */
+    height: 150px; /* Fixed height for images */
+    object-fit: cover; /* Ensures images cover the area, are cropped to fit */
+    background-color: #f0f0f0;
+}
+
+.card-content {
+    padding: 10px;
+    flex-grow: 1; /* Takes up remaining space */
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}

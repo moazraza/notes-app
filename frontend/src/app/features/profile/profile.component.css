@@ -65,10 +65,8 @@
 
 .feed-container {
     padding: 40px;
+    background-image: url('../../../assets/gray-gradient.png');
 
-    background-image: url("../../../assets/gray-gradient.png");
-    justify-content: center;
-    /* width: 90%; */
 }
 
 .feed-header {
@@ -78,7 +76,7 @@
 
 .posts-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     justify-content: center;
 }
@@ -247,4 +245,18 @@
 .buttons {
     display: flex;
     gap: 10px;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Adjust this height as per your layout */
+}
+
+/* Ensure spinner size and color are applied */
+mat-spinner {
+  stroke: #00b3a4 !important; /* Custom teal color */
+  width: 50px !important; /* Adjust the size as needed */
+  height: 50px !important; /* Adjust the size as needed */
 }

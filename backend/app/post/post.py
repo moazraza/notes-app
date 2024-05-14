@@ -150,7 +150,7 @@ def create_post():
 
 @post_db.route('/get_post', methods=['GET'])
 def post_query():
-    post_data = Post.objects().only('id','title', 'user', 'image_ids')
+    post_data = Post.objects().only('id','title', 'user', 'image_ids').order_by('-created_at')
     post_data_list = []
 
     for post in post_data:
@@ -173,6 +173,47 @@ def post_query():
             'images': images
         })
 
-    logging.debug("Fetched Posts Data: %s", post_data_list)
-
     return jsonify(post_data_list), 200
+
+
+@post_db.route('/post/<post_id>', methods=['GET'])
+def get_post(post_id):
+    post = Post.objects(id=ObjectId(post_id)).first()
+    if not post:
+        return jsonify({'message': 'Post not found'}), 404
+
+    # get images from GridFS
+    images = []
+    for image_id in post.image_ids:
+        image = current_app.config['GRIDFS'].get(ObjectId(image_id))
+        image_base64 = base64.b64encode(image.read()).decode('utf-8')
+        images.append(image_base64)
+
+    likes_count = Like.objects(post=post).count()
+    comments = Comment.objects(post=post)
+    comments_count = comments.count()
+    comments_data = []
+    for comment in comments:
+        comments_data.append({
+            'id': str(comment.id),
+            'content': comment.content,
+            'user_id': str(comment.user.id),
+            'username': comment.user.username,
+            'created_at': comment.created_at.isoformat(),
+            'updated_at': comment.updated_at.isoformat()
+        })
+
+
+    post_data = {
+        'id': str(post.id),
+        'title': post.title,
+        'content': post.content,
+        'user': post.user.username,
+        'likes': likes_count,
+        'comments': comments_data,
+        'comments_count': comments_count,
+        'tags': post.tags,
+        'images': images
+    }
+
+    return jsonify(post_data), 200

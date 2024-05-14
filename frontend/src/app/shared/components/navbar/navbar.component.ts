@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
-import {NgOptimizedImage} from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 import {AuthService} from "../../../core/auth/service/auth.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SearchService} from "../../../services/search.service";
@@ -14,7 +14,8 @@ import {SearchService} from "../../../services/search.service";
         RouterOutlet,
         NgOptimizedImage,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        NgIf
     ],
     providers: [AuthService, SearchService],
     templateUrl: './navbar.component.html',
@@ -37,7 +38,7 @@ export class NavbarComponent {
         console.log('Navigating to search page');
         this.searchService.setQuery(this.searchQuery);
         console.log('Query is:', this.searchService.getQuery());
-        this.router.navigate(['/search'], {queryParams: {q: this.searchQuery}});
+        this.router.navigate(['/search'], {queryParams: {q: this.searchQuery}, replaceUrl: true});
     }
 
     logout() {
@@ -46,4 +47,5 @@ export class NavbarComponent {
     }
 
 
+    protected readonly localStorage = localStorage;
 }
