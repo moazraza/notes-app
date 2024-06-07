@@ -2,6 +2,9 @@
     <div class="feed-header">
         <h1>Feed</h1>
     </div>
+    <div *ngIf="loading" class="loading-spinner">
+        <mat-spinner></mat-spinner>
+    </div>
     <div class="posts-grid">
         <ng-container *ngFor="let post of posts">
             <app-post-card [post]="post"></app-post-card>

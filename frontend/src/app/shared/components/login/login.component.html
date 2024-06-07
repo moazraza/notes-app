@@ -33,6 +33,11 @@
                         />
                     </div>
 
+                    <!-- show error on incorrect username/password -->
+                    <div *ngIf="error" class="error mt20" style="color: crimson">
+                        <p>Incorrect username or password</p>
+                    </div>
+
                     <div class="mt20" style="padding-top: 15px">
                         <button class="loginBtn" (click)="doLogin()">Login</button>
                     </div>

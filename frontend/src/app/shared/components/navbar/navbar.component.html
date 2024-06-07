@@ -37,26 +37,15 @@
 
             <!-- Navbar links on the right -->
             <ul class="navbar-nav ms-auto">
-                <!--<li class="nav-item">
-                    <a class="nav-link" routerLink="/signup" routerLinkActive="active">SignUp</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
-                </li>-->
                 <li class="nav-item" *ngIf="localStorage.getItem('user')">
                     <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
                 </li>
                 <li class="nav-item" *ngIf="localStorage.getItem('user')">
                     <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
                 </li>
-                <li class="nav-item" *ngIf="localStorage.getItem('user')">
-                    <a routerLink="/signup" class="navbar-icon">
+                <li class="nav-item navbar-icon" *ngIf="localStorage.getItem('user')">
+                    <a routerLink="/login" class="navbar-icon" (click)="logout()">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="!localStorage.getItem('user')">
-                    <a routerLink="/register" class="navbar-icon">
-                        <i class="fa-solid fa-user-plus"></i>
                     </a>
                 </li>
             </ul>

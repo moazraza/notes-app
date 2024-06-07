@@ -22,12 +22,11 @@ export class PostCardComponent {
     }
 
     getImageURL(base64Image: string) {
-        console.log('getting image url');
         return this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' + base64Image);
     }
 
     openModal() {
-        console.log('herein the function');
+        console.log('opening modal for post: ', this.post.id);
         this.postsService.getPost(this.post.id).subscribe({
             next: (data) => {
                 if (data && data.images) {

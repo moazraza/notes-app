@@ -9,7 +9,7 @@ from bson import ObjectId
 from ..auth.auth import login_required
 from utilities import upload_files
 from mongoengine.errors import DoesNotExist
-from gpt_function import gpt_interpreter
+#from gpt_function import gpt_interpreter
 from config import POST_UPLOADED_FILE_PATH,ICON_UPLOADED_FILE_PATH
 
 app = Flask(__name__)

@@ -44,3 +44,16 @@
     }
 }
 
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Adjust this height as per your layout */
+}
+
+/* Ensure spinner size and color are applied */
+mat-spinner {
+  stroke: #00b3a4 !important; /* Custom teal color */
+  width: 50px !important; /* Adjust the size as needed */
+  height: 50px !important; /* Adjust the size as needed */
+}

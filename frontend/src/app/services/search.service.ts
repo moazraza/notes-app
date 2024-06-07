@@ -14,7 +14,6 @@ export class SearchService {
     }
 
     search(query: string) {
-        // Implement your search logic here
         console.log('Searching for:', query);
         return this.http.get<any>(this.apiUrl, {
             params: {q: query}

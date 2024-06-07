@@ -21,6 +21,7 @@ export class PostsService {
     }
 
     getPost(id: string): Observable<any> {
+        console.log('getting post: ' + id)
         const headers = new HttpHeaders()
             .set('Authorization', '' + localStorage.getItem('token'));
         return this.http.get<any>(this.getPostUrl + '/' + id, {headers});
